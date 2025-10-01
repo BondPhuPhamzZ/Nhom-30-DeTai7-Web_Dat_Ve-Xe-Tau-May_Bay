@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+@*HTML trang chủ nằm ở đây*@
+@* ======================== Phần content (thân web) ở đây =======================*@
+<div id="content">
+    @*Phần banner*@
+    <div class="banner">
+        <img src="~/img/VietNam.jpg" alt="Du lịch Việt Nam" class="banner-img" />
+
+        @*Form tìm máy bay đè lên ảnh*@
+        <div class="search-box">
+            <h1>Đi khắp muôn nơi cùng Three Horizon</h1>
+            <form>
+                <div class="form-row">
+                    <select>
+                        <option>Khứ Hồi</option>
+                        <option>Một Chiều</option>
+                    </select>
+                    <label for="Tu">Từ: </label>
+                    <input type="text" placeholder="Việt Nam (VN)" required />
+                    <label for="Den">Đến: </label>
+                    <input type="text" placeholder="Hà Nội (HAN)" required />
+
+                    <label for="ngaydi">Ngày Đi</label>
+                    <input type="date" name="ngaydi" id="ngaydi" required />
+
+                    <label for="ngayve">Ngày Về</label>
+                    <input type="date" name="ngayve" id="ngayve" required />
+
+                    <label for="soluonghanhkhach">Số Lượng Hành Khách</label>
+                    <input type="number" name="soluonghanhkhach" id="soluonghanhkhach" placeholder="1" min="1" max="120" required />
+
+                    <label for="hangvemaybay">Hạng Vé</label>
+                    <select>
+                        <option>Phổ Thông</option>
+                        <option>Thương Gia</option>
+                        <option>Hạng Nhất</option>
+                    </select>
+
+                    @*Nút bấm tìm kiếm vé*@
+                    <button type="submit">Tìm Chuyến Bay</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @*Chọn thể loại vé*@
+    <div class="theloai-element">
+        <div class="theloai-item">
+            <a href="#"><i class="fa-solid fa-plane"></i></a>
+            <p>Vé Máy Bay</p>
+        </div>
+        <div class="theloai-item">
+            <a href="#"><i class="fa-solid fa-train"></i></a>
+            <p>Vé Tàu</p>
+        </div>
+        <div class="theloai-item">
+            <a href="#"><i class="fa-solid fa-bus"></i></a>
+            <p>Vé Xe</p>
+        </div>
+        <div class="theloai-item">
+            <a href="#"><i class="fa-solid fa-hotel"></i></a>
+            <p>Khách Sạn</p>
+        </div>
+        <div class="theloai-item">
+            <a href="#"><i class="fa-solid fa-car"></i></a>
+            <p>Thuê Xe</p>
+        </div>
+    </div>
+
+    <h2>Three Horizon</h2>
+    @*Đặt vé máy bay với Three Horizon*@
+    <div class="choose-three-horizon">
+        @*first question*@
+        <div class="fm-question">
+            <img src="~/img/plane-2.jpg" class="img-choose" />
+            <div class="choose">
+                <h3>Tại sao nên chọn Three Horizon?</h3>
+                <p>Three Horizon cam kết mang đến cho bạn trải nghiệm đặt vé nhanh chóng, tiện lợi và an toàn với mức giá cạnh tranh nhất trên thị trường. Chúng tôi hợp tác với nhiều hãng hàng không, nhà xe và khách sạn uy tín để đảm bảo bạn luôn có lựa chọn tốt nhất cho chuyến đi của mình.</p>
+            </div>
+        </div>
+        @*second question*@
+        <div class="fm-question">
+            <div class="choose">
+                <h3>Three Horizon bao gồm những dịch vụ gì?</h3>
+                <p>Three Horizon cung cấp dịch vụ đặt vé máy bay trực tuyến từ nhiều hãng hàng không khác nhau, bao gồm cả vé nội địa và quốc tế, vé xe đi khắp mọi miền, vé tàu đi xuyên Việt, book khách sạn ở muôn nơi, thuê xe nhanh chóng và thoải mái. Ngoài ra, chúng tôi còn hỗ trợ khách hàng trong việc chọn chỗ ngồi lý tưởng cho mỗi chuyến đi</p>
+            </div>
+            <img src="~/img/service-2.jpg" class="img-choose" />
+        </div>
+    </div>
+</div>

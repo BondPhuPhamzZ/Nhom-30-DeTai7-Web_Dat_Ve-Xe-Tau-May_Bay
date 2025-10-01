@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Title = "KhamPha";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+<style>
+    /*Phần banner */
+    .khampha-1 {
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 20px 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 1240px;
+        overflow: hidden;
+    }
+    .khampha-1 img {
+        position: relative;
+        max-width: 1240px;
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 1;
+        object-fit: cover;
+        filter: brightness(70%);
+    }
+
+    .khampha-1 .content-1 {
+        position: absolute;
+        padding: 30px;
+        z-index: 2;
+    }
+
+    .khampha-1 .content-1 p {
+        font-size: 25px;
+        font-weight: 500;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* chữ có bóng */
+    }
+
+    .khampha-1 .content-1 h2 {
+        font-size: 40px;
+        margin: 10px 0;
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* chữ có bóng */
+    }
+
+    .khampha-1 .content-1 .btn-chon-ve {
+        margin-bottom: 10px;
+    }
+
+    .khampha-1 .content-1 .btn-chon-ve a {
+        display: inline-block;
+        margin-right: 15px;
+        padding: 10px 20px;
+        background-color: white;
+        color: #001C40;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s, color 0.3s;
+    }
+    
+    .khampha-1 .content-1 .btn-chon-ve a:hover {
+        background-color: yellow;
+        color: #001C40;
+    }
+
+    /* ================ Phần các tỉnh nên đến ===============*/
+    .vietnam-province .province-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px auto;
+        max-width: 1200px;
+        padding: 0 10px;
+    }
+
+    .country-item img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+
+    .country-item p {
+        padding: 0 10px 20px 10px;
+    }
+
+    .country-item {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        text-align: center;
+        background-color: #001C40;
+        color: #f1f1f1;
+        width: 32%;
+        transition: transform 0.3s;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .country-item:hover {
+        transform: translateY(-10px);
+    }
+
+    /*Chữ h2 đầu tiên*/
+    #content .vietnam-toi-yeu {
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        margin-top: 100px;
+        margin-bottom: 30px;
+    }
+</style>
+@*HTML trang khám phá nằm ở đây*@
+<div id="content">
+    @*Banner khám phá*@
+    <div class="khampha-1">
+        <div class="content-1">
+            <p>Bạn vẫn chưa quyết định được điểm đến?</p>
+            <h2>Khám phá mọi điểm đến</h2>
+            <div class="btn-chon-ve">
+                <a href="#">Tìm vé máy bay đi mọi nơi</a>
+                <a href="#">Tìm vé tàu</a>
+                <a href="#">Tìm vé xe</a>
+            </div>
+        </div>
+        <img src="~/img/khampha-1.jpg" alt="khám phá 1" />
+    </div>
+
+    <h2 class="vietnam-toi-yeu">Du lịch trong nước</h2>
+    @*Thân khám phá*@
+    @*Việt Nam*@
+    <div class="vietnam-province">
+        @*Hàng đầu tiên*@
+        <div class="province-row">
+            <div class="country-item">
+                <img src="~/img/hanoi-2.jpg" alt="Hà Nội" />
+                <h3>Hà Nội</h3>
+                <p>Thủ đô ngàn năm văn hiến, điểm đến không thể bỏ qua.</p>
+            </div>
+            <div class="country-item">
+                <img src="~/img/danang-2.jpg" alt="Đà Nẵng" />
+                <h3>Đà Nẵng</h3>
+                <p>Thành phố biển xinh đẹp với nhiều bãi biển nổi tiếng.</p>
+            </div>
+            <div class="country-item">
+                <img src="~/img/hochiminh-2.jpg" alt="Hồ Chí Minh" />
+                <h3>Hồ Chí Minh</h3>
+                <p>Trung tâm kinh tế sôi động và hiện đại của Việt Nam.</p>
+            </div>
+        </div>
+        @*Hàng thứ 2*@
+        <div class="province-row">
+            <div class="country-item">
+                <img src="~/img/phuquoc-2.jpg" alt="Phú Quốc" />
+                <h3>Phú Quốc</h3>
+                <p>Hòn đảo ngọc với bãi biển tuyệt đẹp và thiên nhiên hoang sơ.</p>
+            </div>
+            <div class="country-item">
+                <img src="~/img/hue-2.jpg" alt="Huế" />
+                <h3>Huế</h3>
+                <p>Cố đô Huế với di sản văn hóa phong phú và kiến trúc cổ kính.</p>
+            </div>
+            <div class="country-item">
+                <img src="~/img/NhaTrang-2.jpg" alt="Nha Trang" />
+                <h3>Nha Trang</h3>
+                <p>Thành phố biển nổi tiếng với bãi biển dài và nước biển trong xanh.</p>
+            </div>
+        </div>
+    </div>
+    <h2 class="vietnam-toi-yeu">Du lịch Châu Âu</h2>
+    @*Châu Âu*@
+<div class="Europe">
+    @*Châu Âu dòng 1*@
+    <div class="province-row">
+        <div class="country-item">
+            <img src="~/img/germany-2.jpg" alt="Đức" />
+            <h3>Đức</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+        <div class="country-item">
+            <img src="" alt="Pháp" />
+            <h3>Pháp</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+        <div class="country-item">
+            <img src="" alt="Italy" />
+            <h3>Italy</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+    </div>
+    @*Châu Âu dòng 2*@
+    <div class="province-row">
+        <div class="country-item">
+            <img src="" alt="Tây Ban Nha" />
+            <h3>Tây Ban Nha</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+        <div class="country-item">
+            <img src="" alt="Hà Lan" />
+            <h3>Hà Lan</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+        <div class="country-item">
+            <img src="" alt="Thụy Sĩ" />
+            <h3>Thụy Sĩ</h3>
+            <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
+        </div>
+    </div>
+</div>
+</div>

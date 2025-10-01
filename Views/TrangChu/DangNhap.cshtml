@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+@*Phần CSS của Đăng Nhập*@
+<style>
+    .fm-dangnhap {
+        max-width: 400px;
+        width: 90%;
+        margin: 50px auto;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #001C40;
+        color: #f1f1f1;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        line-height: 1.6;
+    }
+
+    #content h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .fm-dangnhap input[type="text"],
+    .fm-dangnhap input[type="password"] {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 20px; /* khoảng cách giữa các input */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #0a1a36;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .fm-dangnhap input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+        cursor: pointer;
+        width: auto;
+    }
+
+    .fm-dangnhap button {
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+        border: none;
+        border-radius: 5px;
+        color: #001C40;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 10px;
+    }
+
+    .fm-dangnhap button:hover {
+        background-color: yellow;
+    }
+
+    .fm-dangnhap a {
+        display: block;
+        text-align: right;
+        margin-top: 15px;
+        font-size: 14px;
+        color: #ccc;
+        text-decoration: none;
+    }
+
+    .fm-dangnhap a:hover {
+        color: #fff;
+     }
+</style>
+@*Khi chọn phần Đăng Nhập*@
+<div id="content">
+    <h2>Thông tin đăng nhập</h2>
+    <form class="fm-dangnhap">
+        @*Phần đăng nhập*@
+        <label for="tendangnhap">Tên đăng nhập</label> <br />
+        <input type="text" placeholder="Tên đăng nhập hoặc email" name="tendangnhap" id="tendangnhap" required />
+        <br />
+        @*Phần mật khẩu*@
+        <label for="matkhau">Mật khẩu</label> <br />
+        <input type="password" placeholder="Mật khẩu" name="matkhau" id="matkhau" required />
+        <br />
+        @*Tạo phần ghi nhớ*@
+        <input type="checkbox" name="ghinho" id="ghinho" />
+        <label for="ghinho">Ghi nhớ đăng nhập</label>
+        <br />
+        @*click vào nút đăng nhập => submit and sign in*@
+        <button type="submit">Đăng Nhập</button>
+        <br />
+        @*Hỗ trợ khi quên mật khẩu*@
+        <a href="#">Quên mật khẩu?</a>
+    </form>
+</div>

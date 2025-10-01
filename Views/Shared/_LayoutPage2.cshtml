@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="Đặt vé máy bay, vé xe, vé tàu" />
+    <meta name="description" content="Công ty Three Horizon chuyên bán vé xe, vé máy bay, vé tàu uy tín, giá rẻ, nhanh gọn. Còn chần chừ gì mà không trải nghiệm ngay 1 v" />
+    <title>@ViewBag.Title</title>
+    @*Link CSS*@
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    @*Link icon*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" rel="stylesheet" />
+    @*Link icon*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/js/all.min.js"></script>
+    @*Font chữ*@
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+</head>
+
+@*Cấu trúc - khung sườn chung nằm ở đây*@
+<body>
+    @*Phần thanh menu (đầu trang web)*@
+    <div class="nav-bar">
+        <div class="web-logo">
+            <a href="Index"><img src="~/img/logo-web-ve.png" alt="Three Horizon" /></a>
+        </div>
+
+        <div class="nav-bar-level1">
+            <a href="Index" class="fm-menu">Trang Chủ</a>
+            <a href="KhamPha" class="fm-menu">Khám Phá</a>
+            <a href="DatVe" class="fm-menu">Đặt Vé</a>
+            <a href="LienHe" class="fm-menu">Liên Hệ</a>
+        </div>
+        <!-- switch code => Nút chuyển đổi sáng tối trang web -->
+        <div class="nav-bar-right">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            @*Giỏ Hàng*@
+            <div class="cart">
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+            @*Nút đăng nhập hoặc đăng ký*@
+            <div class="container">
+                <div class="nav-bar-con-dang-nhap">
+                    <button type="button" id="fm-btn" class="btn-fm-menu">
+                        Đăng Nhập
+                    </button>
+                    @*Con của nút đăng nhập => xuất hiện xổ xuống khi rê chuột vào đăng nhập*@
+                    <div class="nav-bar-level2-item">
+                        <a href="DangNhap" class="fm-menu">Đăng Nhập</a>
+                        <a href="DangKy" class="fm-menu">Đăng Ký</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* ======================== Phần content (thân web) ở đây =======================*@
+    <div id="content">
+        @*Nội dung từng page => Các page khác hiển thị khác nhau*@
+        <div id="each-page-inside">
+            @RenderBody()
+        </div>
+    </div>
+
+    @*Phần chân trang (cuối trang web)*@
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Logo + giới thiệu -->
+        <div class="footer-logo">
+            <img src="~/img/logo-web-ve.png" alt="Three Horizon Logo" />
+            <h3>Three Horizon</h3>
+        </div>
+
+        <!-- Các liên kết nhanh -->
+        <div class="footer-links">
+            <h4>Liên kết nhanh</h4>
+            <ul>
+                <li><a href="Index">Trang Chủ</a></li>
+                <li><a href="KhamPha">Khám Phá</a></li>
+                <li><a href="DatVe">Đặt Vé</a></li>
+                <li><a href="LienHe">Liên Hệ</a></li>
+            </ul>
+        </div>
+
+        <!-- Thông tin liên hệ -->
+        <div class="footer-contact">
+            <h4>Liên hệ</h4>
+            <p>Email: support@threehorizon.com</p>
+            <p>Hotline: 1900 1234</p>
+            <p>Địa chỉ: 828 Sư Vạn Hạnh, phường Hòa Hưng, TP. HCM</p>
+        </div>
+    </div>
+
+    <!-- Bản quyền -->
+    <div class="footer-bottom">
+        <p>&copy; 2025 Three Horizon. All rights reserved.</p>
+    </div>
+</footer>
+
+    @*Đoạn này hỏi CHAT GPT*@
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark', toggle.checked);
+        });
+    </script>
+</body>
+</html>
