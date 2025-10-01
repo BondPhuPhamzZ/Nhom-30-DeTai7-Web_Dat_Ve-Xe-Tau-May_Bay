@@ -3,5 +3,94 @@
     ViewBag.Title = "DatVe";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
 }
-@*HTML Trang đặt vé ở đây*@
+<style>
+    #content {
+/*        max-width: 1240px;*/
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    #content h2 {
+        text-align: center;
+        margin: 20px 0;
+    }
 
+    /*Set khung chọn vé*/
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        background: rgba(0, 28, 64, 0.85);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+        .form-row label {
+            margin-right: 8px;
+            font-weight: bold;
+            align-self: center;
+            color: white;
+        }
+        .form-row input[type="text"],
+        .form-row input[type="date"],
+        .form-row input[type="number"],
+        .form-row select {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 150px;
+        }
+        .form-row button {
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #001C40;
+            color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+            .form-row button:hover {
+                color: #001C40;
+                background-color: yellow;
+            }
+
+</style>
+@*HTML Trang đặt vé ở đây*@
+<div id="content">
+    <h2>Vé Máy Bay</h2>
+    @*Form tìm máy bay đè lên ảnh*@
+        <form>
+            <div class="form-row">
+                <select>
+                    <option>Khứ Hồi</option>
+                    <option>Một Chiều</option>
+                </select>
+                <label for="Tu">Từ: </label>
+                <input type="text" placeholder="Việt Nam (VN)" required />
+                <label for="Den">Đến: </label>
+                <input type="text" placeholder="Hà Nội (HAN)" required />
+
+                <label for="ngaydi">Ngày Đi</label>
+                <input type="date" name="ngaydi" id="ngaydi" required />
+
+                <label for="ngayve">Ngày Về</label>
+                <input type="date" name="ngayve" id="ngayve" required />
+
+                <label for="soluonghanhkhach">Số Lượng Hành Khách</label>
+                <input type="number" name="soluonghanhkhach" id="soluonghanhkhach" placeholder="1" min="1" max="120" required />
+
+                <label for="hangvemaybay">Hạng Vé</label>
+                <select>
+                    <option>Phổ Thông</option>
+                    <option>Thương Gia</option>
+                    <option>Hạng Nhất</option>
+                </select>
+
+                @*Nút bấm tìm kiếm vé*@
+                <button type="submit">Tìm Chuyến Bay</button>
+            </div>
+        </form>
+</div>

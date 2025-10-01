@@ -69,6 +69,7 @@ body {
 /*  border: solid 1px;*/
 }
 
+/*Hiệu ứng khi di chuột hoặc ấn vào các trang ở thanh menu*/
 .nav-bar-level1 .fm-menu:hover {
     color: #FFD700;
     backdrop-filter: brightness(100px);
@@ -83,7 +84,7 @@ body {
 }
 
 /*============================= Giỏ hàng =============================*/
-.nav-bar-right .cart {
+.nav-bar-right .cart{
     color: white;
     text-decoration: none;
     font-weight: 700;
@@ -231,31 +232,37 @@ body.dark .site-footer a {
 }
 
 /* ========================== Cha của banner và form ========================== */
+/*banner chứa ảnh và form search vé*/
 .banner {
     position: relative;
     width: 100%;
-    height: 500px; /* hoặc chiều cao bạn muốn */
+    min-height: 500px;
     overflow: hidden;
     margin: 0;
+    /*Bất kỳ phần tử nào bên trong không phải position: absolute; sẽ bị dàn ngang*/
+    /*Hỗ trợ căn giữa => responsive*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Ảnh banner => Ảnh Việt Nam */
 .banner-img {
+    position: absolute; /*do nó là absolute nên thoát khỏi display: flex; không bị dàn ngang*/
+    /*Do có top/left = 0, width/height là 100% + absolute => nó phủ toàn bộ cha*/
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    z-index: 1; /*cho nằm dưới search box*/
 }
 
 /* ========================  Form nổi trên ảnh (form chọn vé máy bay) ========================== */
 .search-box {
-    position: absolute;
-    /*Căn giữa ảnh*/
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative; /*tham gia flex => căn giữa banner*/
     background: rgba(0, 28, 64, 0.85);
-    padding: 50px;
+    padding: 30px;
     border-radius: 12px;
     max-width: 1240px;
     width: 90%;
