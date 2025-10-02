@@ -223,7 +223,7 @@ body.dark .site-footer a {
 
 /*============================= Phần Content (thân web) ===================================*/
 #content {
-    width: 1200px;
+    width: 1240px;
     /* Muốn mỗi bên rộng 24px thì lấy 100% - 48px */
     max-width: calc(100% - 48px);
     /* Tự động căn giữa */
@@ -259,6 +259,7 @@ body.dark .site-footer a {
 }
 
 /* ========================  Form nổi trên ảnh (form chọn vé máy bay) ========================== */
+/*Search box chứa form => form là con và nhờ search box để nổi lên*/
 .search-box {
     position: relative; /*tham gia flex => căn giữa banner*/
     background: rgba(0, 28, 64, 0.85);
@@ -297,9 +298,11 @@ body.dark .site-footer a {
 .form-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
-    align-items: center;
+    gap: 20px;
+    background-color: rgba(0, 28, 64, 0.85);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .form-row select,
@@ -312,8 +315,8 @@ body.dark .site-footer a {
 }
 
 .form-row label {
-    padding: 10px 14px;
-    font-size: 20px;
+    align-self: center;
+    color: white;
 }
 
 /* ====================== Phần lựa chọn thể loại vé ==========================*/

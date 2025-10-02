@@ -5,92 +5,565 @@
 }
 <style>
     #content {
-/*        max-width: 1240px;*/
+/*      max-width: 1240px;*/
         margin: 20px auto;
         padding: 0 20px;
-    }
-    #content h2 {
-        text-align: center;
-        margin: 20px 0;
+        margin-bottom: 200px;
     }
 
-    /*Set khung chọn vé*/
+    /*Tabs => Khi nhấn vào các nút thì sẽ hiển thị khung chọn vé ra*/
+    .service-tabs {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Phần cha - khung chứa các nút tab ấn để chuyển form => lớp cha bao gồm 5 nút tab */
+    .tab-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Ẩn nút tròn để tick => ẩn radio để trông chuyên nghiệp hơn */
+    .tab-buttons input[type="radio"] {
+        display: none;
+    }
+
+    /* nút tab lựa chọn thể loại vé */
+    .tab-buttons .tab-service {
+        padding: 12px 25px;
+        background-color: #001C40;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 20px;
+        border: 2px solid #ddd;
+    }
+
+    /*Khi di chuột qua các tab*/
+    .tab-buttons .tab-service:hover {
+        background-color: #001C40;
+        filter: brightness(110%);
+        color: white;
+        border: 2px solid #001C40;
+    }
+
+    /* Khi nhấn vào tab => đang ở tab nào thì tab đó sẽ sáng lên */
+    .tab-buttons input[type="radio"]:checked + label {
+        background-color: white;
+        color: #001C40;
+        border: 2px solid #001C40;
+        opacity: 0.8;
+        backdrop-filter: blur(5px);
+    }
+
+    /* Ẩn tất cả form mặc định */
+    .form-service {
+        display: none;
+    }
+
+    /* Hiển thị form khi tab tương ứng được chọn */
+    /*VD: Khi nhấn vào thẻ input có id là tab-plane thì form có class là form-plane sẽ hiển thị lên*/
+    #tab-plane:checked ~ .form-plane {
+        display: block;
+    }
+
+    #tab-train:checked ~ .form-train {
+        display: block;
+    }
+
+    #tab-bus:checked ~ .form-bus {
+        display: block;
+    }
+
+    #tab-hotel:checked ~ .form-hotel {
+        display: block;
+    }
+
+    #tab-car:checked ~ .form-car {
+        display: block;
+    }
+
+    /*Style cho khung form */
     .form-row {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
-        background: rgba(0, 28, 64, 0.85);
+        background-color: rgba(0, 28, 64, 0.85);
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-        .form-row label {
-            margin-right: 8px;
-            font-weight: bold;
-            align-self: center;
-            color: white;
-        }
-        .form-row input[type="text"],
-        .form-row input[type="date"],
-        .form-row input[type="number"],
-        .form-row select {
-            padding: 8px 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            width: 150px;
-        }
-        .form-row button {
-            font-weight: bold;
-            padding: 10px 20px;
-            background-color: #001C40;
-            color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-            .form-row button:hover {
-                color: #001C40;
-                background-color: yellow;
-            }
+     }
 
+     .form-row label {
+        margin-right: 8px;
+        font-weight: bold;
+        align-self: center;
+        color: white;
+     }
+
+     .form-row input[type="text"],
+     .form-row input[type="date"],
+     .form-row input[type="number"],
+     .form-row select {
+        padding: 8px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        width: 150px;
+     }
+
+     /*Nút tìm kiếm chuyến bay*/
+     .form-row button {
+        font-weight: bold;
+        padding: 10px 20px;
+        background-color: #001C40;
+        color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+     }
+
+     .form-row button:hover {
+        color: #001C40;
+        background-color: yellow;
+     }
+
+     /*Những chuyến đi nổi bật => card thể hiện vé gợi ý*/
+    .choose-trip h2 {
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .choose-trip img {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .choose-trip {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    /*========================= Phần content trong trang đặt vé ==========================*/
+    /*Set thuộc tính cho hàng 1 hàng gồm 3 card*/
+    .choose-trip-1 {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px auto;
+        max-width: 1200px;
+        padding: 0 10px;
+        gap: 20px;
+    }
+
+    /*Thuộc tính ảnh nằm dưới thẻ h2*/
+
+    .card {
+        padding: 10px;
+        background-color: white;
+        color: #001C40;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        transition: transform 0.3s;
+        flex: 1; /* mỗi card chiếm không gian bằng nhau */
+        display: flex;
+        flex-direction: column; /* xếp nội dung theo cột */
+        justify-content: space-between; /* đẩy nút xuống cuối => Do dùng thuộc tính display: flex; flex-direction: column; thì Phần tử đầu tiên nằm sát trên cùng, Phần tử cuối cùng nằm sát dưới cùng, Các phần tử ở giữa được phân bổ khoảng cách đều nhau */
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+     }
+
+    .card h3 {
+        font-size: 30px;
+        margin-bottom: 10px;
+        color: #001C40;
+    }
+
+    .card .pay-for {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    .card .pay-for p {
+        font-weight: bold;
+        font-size: 18px;
+        color: #001C40;
+    }
+
+    .card .pay-for h4 {
+        font-size: 22px;
+        color: #001C40;
+        font-weight: bold;
+    }
+
+    .card p {
+        flex-grow: 1; /* phần text chiếm không gian còn lại */
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .card a {
+        align-self: center; /* căn nút ở giữa */
+        margin: 10px 0 20px 0; /* khoảng cách trên nút */
+        padding: 10px 20px; /*Khoảng cách chữ trong nút so với viền nút*/
+        background-color: #001C40;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+        transition: background-color 0.3s, color 0.3s;
+
+    }
+
+    .card a:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        background-color: yellow;
+        color: #001C40;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* ============== Set phần ảnh banner nằm dưới chữ ==============*/
+    .anh-duoi-chu {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .anh-duoi-chu .img-datve-banner {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        filter: brightness(0.65);
+        transition: transform 0.3s, filter 0.3s;
+    }
+
+    /* lớp ảo cho chữ nằm trên ảnh */
+    .banner-text {
+        position: absolute;
+        inset: 0; /* phủ toàn bộ ảnh */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 0 10px; /* tránh chữ dính mép */
+        overflow: hidden;
+    }
+
+    .banner-text h2 {
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    /*Set thuộc tính cho phần du lịch ngoài nước*/
+    .top-trip.out-country {
+        margin-top: 100px;
+    }
+
+    /*Set thuộc tính cho slogan ở thanh search chọn vé*/
+    .service-tabs h3 {
+        text-align: center;
+        font-size: 45px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
 </style>
 @*HTML Trang đặt vé ở đây*@
 <div id="content">
-    <h2>Vé Máy Bay</h2>
-    @*Form tìm máy bay đè lên ảnh*@
-        <form>
-            <div class="form-row">
-                <select>
-                    <option>Khứ Hồi</option>
-                    <option>Một Chiều</option>
-                </select>
-                <label for="Tu">Từ: </label>
-                <input type="text" placeholder="Việt Nam (VN)" required />
-                <label for="Den">Đến: </label>
-                <input type="text" placeholder="Hà Nội (HAN)" required />
+    @*Ảnh nằm bên dưới Three Horizon*@
+    <div class="anh-duoi-chu">
+        <img class="img-datve-banner" src="~/img/trip-3.jpg" alt="ảnh banner đặt vé" />
+        <div class="banner-text"> @*Lớp ảo làm nền cho chữ trên background*@
+            <h2>Three Horizon đồng hành cùng bạn mỗi chuyến đi</h2>
+        </div>
+    </div>
+    
+    <div class="service-tabs">
+        <h3>Bạn có thể lựa chọn loại vé muốn trải nghiệm</h3>
+        <div class="tab-buttons">
+            <!-- Radio buttons và Labels cho tabs -->
+            <input type="radio" id="tab-plane" name="service" checked />
+            <label class="tab-service" for="tab-plane">Vé máy bay</label>
 
-                <label for="ngaydi">Ngày Đi</label>
-                <input type="date" name="ngaydi" id="ngaydi" required />
+            <input type="radio" id="tab-train" name="service" />
+            <label class="tab-service" for="tab-train">Vé tàu</label>
 
-                <label for="ngayve">Ngày Về</label>
-                <input type="date" name="ngayve" id="ngayve" required />
+            <input type="radio" id="tab-bus" name="service" />
+            <label class="tab-service" for="tab-bus">Vé xe</label>
 
-                <label for="soluonghanhkhach">Số Lượng Hành Khách</label>
-                <input type="number" name="soluonghanhkhach" id="soluonghanhkhach" placeholder="1" min="1" max="120" required />
+            <input type="radio" id="tab-hotel" name="service" />
+            <label class="tab-service" for="tab-hotel">Khách sạn</label>
 
-                <label for="hangvemaybay">Hạng Vé</label>
-                <select>
-                    <option>Phổ Thông</option>
-                    <option>Thương Gia</option>
-                    <option>Hạng Nhất</option>
-                </select>
+            <input type="radio" id="tab-car" name="service" />
+            <label class="tab-service" for="tab-car">Thuê xe</label>
 
-                @*Nút bấm tìm kiếm vé*@
-                <button type="submit">Tìm Chuyến Bay</button>
+            <!-- Form vé máy bay -->
+            <form class="form-service form-plane">
+                <div class="form-row">
+                    <select>
+                        <option>Một Chiều</option>
+                        <option>Khứ Hồi</option>
+                    </select>
+                    <label>Từ:</label>
+                    <input type="text" placeholder="Việt Nam (VN)" required />
+                    <label>Đến:</label>
+                    <input type="text" placeholder="Hà Nội (HAN)" required />
+                    <label>Ngày Đi</label>
+                    <input type="date" required />
+                    <label>Ngày Về</label>
+                    <input type="date" required />
+                    <label>Số Lượng</label>
+                    <input type="number" placeholder="1" min="1" max="120" required />
+                    <label>Hạng Vé</label>
+                    <select>
+                        <option>Phổ Thông</option>
+                        <option>Thương Gia</option>
+                        <option>Hạng Nhất</option>
+                    </select>
+                    <button type="submit">Tìm Chuyến Bay</button>
+                </div>
+            </form>
+
+            <!-- Form vé tàu -->
+            <form class="form-service form-train">
+                <div class="form-row">
+                    <label>Từ:</label>
+                    <input type="text" placeholder="Ga Sài Gòn" required />
+                    <label>Đến:</label>
+                    <input type="text" placeholder="Ga Hà Nội" required />
+                    <label>Ngày đi</label>
+                    <input type="date" required />
+                    <button type="submit">Tìm Vé Tàu</button>
+                </div>
+            </form>
+
+            <!-- Form vé xe -->
+            <form class="form-service form-bus">
+                <div class="form-row">
+                    <label>Từ:</label>
+                    <input type="text" placeholder="TP.HCM" required />
+                    <label>Đến:</label>
+                    <input type="text" placeholder="Đà Lạt" required />
+                    <label>Ngày đi</label>
+                    <input type="date" required />
+                    <button type="submit">Tìm Vé Xe</button>
+                </div>
+            </form>
+
+            <!-- Form khách sạn -->
+            <form class="form-service form-hotel">
+                <div class="form-row">
+                    <label>Địa điểm</label>
+                    <input type="text" placeholder="Đà Nẵng" required />
+                    <label>Nhận phòng</label>
+                    <input type="date" required />
+                    <label>Trả phòng</label>
+                    <input type="date" required />
+                    <button type="submit">Tìm Khách Sạn</button>
+                </div>
+            </form>
+
+            <!-- Form thuê xe -->
+            <form class="form-service form-car">
+                <div class="form-row">
+                    <label>Địa điểm</label>
+                    <input type="text" placeholder="Hà Nội" required />
+                    <label>Ngày thuê</label>
+                    <input type="date" required />
+                    <label>Ngày trả</label>
+                    <input type="date" required />
+                    <button type="submit">Thuê Xe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @*Những chuyến đi nổi bật => gợi ý vé*@
+<div class="choose-trip">
+    @*Ưu đãi hè này => dùng banner thể hiện ưu đãi*@
+    <img src="~/img/sale-2.jpg" alt="giảm giá" />
+    <hr />
+    <h2>Những chuyến đi nổi bật</h2>
+
+    @*Dòng vé đầu tiên => Chuyến bay trong nước*@
+    <h3 class="top-trip">Du lịch trong nước</h3>
+    <div class="choose-trip-1 first-line">
+        @*Thẻ card 1*@
+        <div class="card card-1">
+            <img src="~/img/hochiminh-3.jpg" alt="Thành phố Hồ Chí Minh" />
+            <h3>Thành phố Hồ Chí Minh</h3>
+            <p>Thành phố năng động bậc nhất Việt Nam, nổi bật với phố đi bộ Nguyễn Huệ, chợ Bến Thành, và nền ẩm thực đa dạng ngày đêm</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
             </div>
-        </form>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 2*@
+        <div class="card card-2">
+            <img src="~/img/hanoi-3.jpg" alt="Hà Nội" />
+            <h3>Hà Nội</h3>
+            <p>Thủ đô nghìn năm văn hiến, lưu giữ vẻ đẹp cổ kính với Hồ Hoàn Kiếm, Phố Cổ, Văn Miếu và những con phố ngập tràn hương vị ẩm thực</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 3*@
+        <div class="card card-3">
+            <img src="~/img/danang-3.jpg" alt="Đà Nẵng" />
+            <h3>Đà Nẵng</h3>
+            <p>Thành phố biển hiện đại, nổi tiếng với cầu Rồng, Bà Nà Hills, biển Mỹ Khê và vị trí trung tâm kết nối Hội An, Huế</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+    </div>
+
+    @*Dòng vé thứ 2*@
+    <div class="choose-trip-1 second-line">
+        @*Thẻ card 1*@
+        <div class="card card-1">
+            <img src="~/img/nhatrang-3.jpg" alt="Nha Trang" />
+            <h3>Nha Trang</h3>
+            <p>Thiên đường biển đảo, quyến rũ với bãi biển trong xanh, VinWonders, Hòn Mun, và nhiều hoạt động thể thao biển hấp dẫn</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 2*@
+        <div class="card card-2">
+            <img src="~/img/hue-3.jpg" alt="Huế" />
+            <h3>Huế</h3>
+            <p>Cố đô trầm mặc, đậm dấu ấn lịch sử với Kinh Thành Huế, lăng tẩm vua chúa, chùa Thiên Mụ cùng nền ẩm thực cung đình đặc sắc</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 3*@
+        <div class="card card-3">
+            <img src="~/img/vungtau-3.jpg" alt="Vũng Tàu" />
+            <h3>Vũng Tàu</h3>
+            <p>Điểm đến nghỉ dưỡng gần Sài Gòn, nổi bật với tượng Chúa Kitô Vua, Bãi Sau, Hải Đăng Vũng Tàu và hải sản tươi ngon</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>1.200.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+    </div>
+
+    @*Những chuyến đi Châu Âu*@
+    @*Dòng vé đầu tiên*@
+    <h3 class="top-trip out-country">Du lịch ngoài nước</h3>
+    <div class="choose-trip-1 first-line">
+        @*Thẻ card 1*@
+        <div class="card card-1">
+            <img src="~/img/thailand-3.jpg" alt="Thailand" />
+            <h3>Thailand</h3>
+            <p>Gần, văn hóa thân thiện, ẩm thực đường phố, biển đẹp, chi phí vừa phải</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>3.900.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 2*@
+        <div class="card card-2">
+            <img src="~/img/japan-3.jpg" alt="Nhật Bản" />
+            <h3>Japan</h3>
+            <p>Cảnh quan thiên nhiên, văn hóa truyền thống - hiện đại giao thoa, ẩm thực tinh tế</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>8.000.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 3*@
+        <div class="card card-3">
+            <img src="~/img/australia-3.jpg" alt="Úc" />
+            <h3>Australia</h3>
+            <p>Cơ hội khám phá thành phố lớn (Sydney, Melbourne), thiên nhiên rộng lớn, trải nghiệm khác biệt</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>13.000.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+    </div>
+
+    @*Dòng vé thứ 2*@
+    <div class="choose-trip-1 second-line">
+        @*Thẻ card 1*@
+        <div class="card card-1">
+            <img src="~/img/korea-3.jpg" alt="Hàn Quốc" />
+            <h3>Korean</h3>
+            <p>Mùa hoa anh đào, văn hóa K-pop, ẩm thực đường phố, mua sắm năng động</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>5.000.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 2*@
+        <div class="card card-2">
+            <img src="~/img/sing-3.jpg" alt="Singapore" />
+            <h3>Singapore</h3>
+            <p>Hiện đại, sạch sẽ, nhiều điểm tham quan & mua sắm, thích hợp du lịch ngắn ngày</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>4.000.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+        @*Thẻ card 3*@
+        <div class="card card-3">
+            <img src="~/img/malay-3.jpg" alt="Malaysia" />
+            <h3>Malaysia</h3>
+            <p>Chi phí vừa phải, nhiều đảo đẹp, văn hóa đa dạng, ẩm thực phong phú</p>
+            <div class="pay-for">
+                <p>Giá từ:</p>
+                <h4>4.000.000 VND/Người</h4>
+            </div>
+            <a href="#">Đặt vé</a>
+        </div>
+    </div>
+</div>
 </div>
