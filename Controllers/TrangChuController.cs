@@ -33,5 +33,29 @@ namespace Nhom_30_DeTai7_Web_Dat_Ve_Xe_Tau_May_Bay.Controllers
         {
             return View();
         }
+        public ActionResult GioHang()
+        {
+            return View();
+        }
+        public ActionResult VeMayBay()
+        {
+            return View();
+        }
+        public ActionResult VeTau()
+        {
+            return View();
+        }
+        public ActionResult VeXe()
+        {
+            return View();
+        }
+        public ActionResult KhachSan()
+        {
+            return View();
+        }
+        public ActionResult ThueXe()
+        {
+            return View();
+        }
     }
 }

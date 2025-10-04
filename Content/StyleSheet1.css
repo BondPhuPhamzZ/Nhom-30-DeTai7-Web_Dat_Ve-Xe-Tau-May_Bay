@@ -13,7 +13,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /*Đảm bảo không xuát hiện thanh trượt ngang*/
+    overflow-x: hidden;
     background-color: #fffcf4;
     color: #222;
     transition: background-color 0.3s, color 0.3s;
@@ -21,9 +21,7 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-
 /*===================== Phần Menu Web ===========================*/
-/*============================ Thanh nav bar này là thanh menu đầu trang =======================*/
 .nav-bar {
     box-sizing: border-box;
     width: 100%;
@@ -32,33 +30,55 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px 0 0;
+    padding: 0 20px; /*Padding đều 2 bên*/
     min-height: 60px;
     position: sticky;
     top: 0;
     z-index: 1000;
+    flex-wrap: wrap; /*Responsive cho mobile */
 }
 
-/*Set kích thước cho lớp div bọc bên ngoài => lúc này ảnh nằm trong, nếu set 100% thì ảnh se lắp đầy lớp bọc đó*/
+/*Logo và tên thương hiệu => bọc logo và tên thương hiệu web*/
 .nav-bar .web-logo {
-    width: 60px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+    /*không nên dùng width-height cố định, nếu thêm brnad-name vào => bị giới hạn trong 100px*/
+}
+
+.nav-bar .web-logo a {
+    width: 100px;
     height: 50px;
-    margin-right: 10px;
-    margin-left: 0;
+    display: flex;
+    align-items: center;
 }
 
 .nav-bar .web-logo img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* hoặc cover*/
+    object-fit: contain;
 }
 
-/*Menu các trang ở đây nè*/
+/* Tên thương hiệu */
+.nav-bar .brand-name {
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+/*======================= Menu các trang =============== */
 .nav-bar-level1 {
     display: flex;
     gap: 50px;
+    flex: 1; /*Menu chiếm không gian còn lại giữa logo và phần bên phải*/
+    justify-content: center; /*Các link menu căn giữa chỗ của nó*/
 }
-/* ============================ Hiển thị các trang trên thanh menu ====================================*/
+
+/*Khối bọc các tab menu*/
 .nav-bar-level1 .fm-menu {
     color: white;
     text-decoration: none;
@@ -66,70 +86,138 @@ body {
     font-size: 20px;
     background-color: transparent;
     padding: 8px 15px;
-/*  border: solid 1px;*/
+    transition: all 0.3s ease; /*Hiệu ứng khi hover => cho mượt*/
+    border-radius: 4px;
 }
 
-/*Hiệu ứng khi di chuột hoặc ấn vào các trang ở thanh menu*/
 .nav-bar-level1 .fm-menu:hover {
     color: #FFD700;
-    backdrop-filter: brightness(100px);
     background-color: rgba(255, 255, 255, 0.1);
-    opacity: 0.8;
 }
 
+/* Phần bên phải navbar */
 .nav-bar-right {
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-bar-right > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
 }
 
 /*============================= Giỏ hàng =============================*/
-.nav-bar-right .cart{
-    color: white;
+.cart-container {
+    position: relative; /*Lấy cha làm gốc để hiện phần con*/
+}
+
+.cart-container .cart {
+    color: #001C40;
     text-decoration: none;
     font-weight: 700;
     font-size: 18px;
     background-color: white;
     padding: 8px 15px;
     border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex; /*Để sử dụng các thuộc tính align và justify để căn giữa*/
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
 }
     
-.nav-bar-right .cart:hover {
-    color: #FFD700;
-    backdrop-filter: brightness(100px);
+.cart-container .cart:hover {
     background-color: #FFD700;
-    opacity: 0.8;   
 }
 
-/* ================= Nút bấm đăng nhập hoặc đăng ký bên (con của đăng nhập) ================*/
+/* ============= Dropdown giỏ hàng ============= */
+.cart-container .cart-dropdown {
+/*    display: none;*/ /* => Nếu sử dụng opacity + visibility => KHÔNG cần display là NONE*/
+    position: absolute; /*Để nó nổi lên trên*/
+    top: 100%; /*Ngay bên dưới icon cart*/
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 300px;
+    padding: 15px;
+    z-index: 1001;
+    color: #222;
+    /*Mặc định sẽ bị ẩn*/
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all 0.25s ease;
+}
+
+/*Hover vào thì cart hiện ra*/
+.cart-container:hover .cart-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/*Bên trong giỏ hàng sau khi hover*/
+.cart-dropdown p {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    border-bottom: 2px solid #001C40;
+    padding-bottom: 6px;
+}
+
+.cart-dropdown .cart-item {
+    padding: 10px 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+    color: #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-dropdown .cart-item:last-of-type {
+    border-bottom: none;
+}
+
+.cart-dropdown .cart-item .item-name {
+    flex: 1;
+}
+
+.cart-dropdown .cart-item .item-price {
+    color: #001C40;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.cart-dropdown .view-cart {
+    display: block;
+    text-align: center;
+    background-color: #001C40;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.cart-dropdown .view-cart:hover {
+    background-color: #FFD700;
+    color: #001C40;
+}
+
+/* ================= Nút đăng nhập ================*/
 .nav-bar-con-dang-nhap {
     position: relative;
 }
 
-.nav-bar-level2-item {
-    position: absolute;
-    top: 100%;
-    right: 0px;
-    background-color: #001C40;
-    padding: 10px 0;
-    display: none;
-    flex-direction: column;
-    min-width: 150px;
-}
-
-.nav-bar-level2-item a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    display: block;
-    font-size: 16px;
-}
-
-.nav-bar-level2-item a:hover {
-    background-color: #003366;
-}
-
-/* ======================== Nút đăng nhập - cha của 2 nút trên =======================*/
 .btn-fm-menu {
     background-color: white;
     color: black;
@@ -139,22 +227,58 @@ body {
     font-weight: 700;
     font-size: 16px;
     border-radius: 4px;
+    min-width: 60px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .btn-fm-menu:hover {
     color: #001C40;
-    backdrop-filter: brightness(100px);
     background-color: #FFD700;
-    opacity: 0.8;
 }
 
-/* Hover để hiện menu => Di chuột vào cha sẽ hiện ra 2 con */
-.nav-bar-con-dang-nhap:hover .nav-bar-level2-item {
+/*======================= Dropdown đăng nhập ==================== */
+/* Dropdown đăng nhập */
+.nav-bar-level2-item {
+    position: absolute;
+    top: 100%; /* để dính ngay dưới nút */
+    right: 0;
+    background-color: #001C40;
+    padding: 10px 0;
     display: flex;
-    z-index: 3;
+    flex-direction: column;
+    min-width: 150px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all 0.25s ease;
+    z-index: 1001;
 }
 
-/* =============================== Nút switch day/ night =============================== */
+/* Hover vào cha thì hiện dropdown */
+.nav-bar-con-dang-nhap:hover .nav-bar-level2-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Link trong dropdown */
+.nav-bar-level2-item a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.nav-bar-level2-item a:hover {
+    background-color: #003366;
+}
+
+/* =============================== Nút switch day/night =============================== */
 .switch {
     position: relative;
     display: inline-block;
@@ -168,7 +292,6 @@ body {
     height: 0;
 }
 
-/* Thanh nền */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -180,7 +303,7 @@ body {
     transition: .4s;
     border-radius: 34px;
 }
-    /* Nút tròn */
+
 .slider:before {
     position: absolute;
     content: "";
@@ -192,9 +315,9 @@ body {
     transition: .4s;
     border-radius: 50%;
 }
-/* Khi bật */
+
 input:checked + .slider {
-    background-color: transparent;
+    background-color: #FFD700;
     border: solid 2px #FFD700;
 }
 
@@ -202,33 +325,135 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* ----- Theme cho toàn trang ----- */
+/* =============================== Dark Mode =============================== */
 body.dark {
-    background-color: #001C40; /* nền tối */
-    color: #f1f1f1; /* chữ sáng */
+    background-color: #001C40;
+    color: #f1f1f1;
 }
 
 body.dark .choose {
-    color: #f1f1f1; /* màu sáng trong dark mode */
+    color: #f1f1f1;
 }
 
 body.dark .site-footer {
-    background-color: #f1f1f1; /* nền sáng */
-    color: #000; /* chữ tối */
+    background-color: #f1f1f1;
+    color: #000;
 }
 
 body.dark .site-footer a {
-    color: #000; /* link tối */
+    color: #000;
 }
 
-/*============================= Phần Content (thân web) ===================================*/
+body.dark .nav-bar {
+    background-color: #fffcf4;
+}
+
+body.dark .nav-bar .brand-name {
+    color: #001C40;
+}
+
+body.dark .nav-bar-level1 .fm-menu {
+    color: #001C40;
+    border: 1px solid #001C40;
+}
+
+body.dark .nav-bar-level1 .fm-menu:hover {
+    color: #FFD700;
+    background-color: rgba(0, 28, 64, 0.1);
+}
+
+body.dark .btn-fm-menu {
+    border: 1px solid black;
+}
+
+body.dark .nav-bar-level2-item {
+    background-color: white;
+    border: 1px solid #001C40;
+}
+
+body.dark .nav-bar-level2-item a {
+    color: #001C40;
+}
+
+body.dark .nav-bar-level2-item a:hover {
+    background-color: #FFD700;
+}
+
+/* =============================== Responsive Mobile =============================== */
+@media (max-width: 1024px) {
+    .nav-bar-level1 {
+        gap: 30px;
+    }
+    
+    .nav-bar-level1 .fm-menu {
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+    
+    .nav-bar .brand-name {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        flex-direction: column;
+        padding: 10px;
+        gap: 15px;
+    }
+    
+    .nav-bar .web-logo {
+        margin-right: 0;
+    }
+    
+    .nav-bar-level1 {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-bar-level1 .fm-menu {
+        font-size: 16px;
+    }
+    
+    .nav-bar-right {
+        gap: 15px;
+    }
+    
+    .cart-dropdown {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-bar .brand-name {
+        font-size: 16px;
+    }
+    
+    .nav-bar-level1 .fm-menu {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+    
+    .btn-fm-menu,
+    .cart-container .cart {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+/*============================= Phần Content (THÂN WEB) ===================================*/
 #content {
-    width: 1240px;
+    /*width: 1240px;*/ /*Không nên sử dụng width cố định => màn hình nhỏ hơn sẽ bị tràn ra ngoài*/
+    width: 100%;
     /* Muốn mỗi bên rộng 24px thì lấy 100% - 48px */
-    max-width: calc(100% - 48px);
+    max-width: 1240px; /*Không hoạt động nếu set thuộc tính width cố định => dùng % cho width*/
     /* Tự động căn giữa */
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 20px;
+    
+    margin: 0 auto; /*Thêm margin 0 auto để căn giữa khối*/
 }
 
 /* ========================== Cha của banner và form ========================== */
@@ -236,14 +461,16 @@ body.dark .site-footer a {
 .banner {
     position: relative;
     width: 100%;
-    min-height: 500px;
+    min-height: 600px;
     overflow: hidden;
-    margin: 0;
+/*    margin: 0;*/
     /*Bất kỳ phần tử nào bên trong không phải position: absolute; sẽ bị dàn ngang*/
     /*Hỗ trợ căn giữa => responsive*/
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 80px;
+    border-radius: 10px;
 }
 
 /* Ảnh banner => Ảnh Việt Nam */
@@ -255,15 +482,17 @@ body.dark .site-footer a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: brightness(0.7);
     z-index: 1; /*cho nằm dưới search box*/
 }
 
 /* ========================  Form nổi trên ảnh (form chọn vé máy bay) ========================== */
-/*Search box chứa form => form là con và nhờ search box để nổi lên*/
+/*Search box chứa form => form là con và nhờ search box để nổi lên => form tìm kiếm nổi trên banner*/
 .search-box {
     position: relative; /*tham gia flex => căn giữa banner*/
-    background: rgba(0, 28, 64, 0.85);
-    padding: 30px;
+    background: rgba(0, 28, 64, 0.92);
+    /*padding: 30px;*/
+    padding: 35px 30px;
     border-radius: 12px;
     max-width: 1240px;
     width: 90%;
@@ -342,6 +571,7 @@ body.dark .site-footer a {
     justify-content: space-between;
     align-items: center;
     color: white;
+    text-decoration: none;
 }
 
 .theloai-item:hover {
@@ -352,7 +582,6 @@ body.dark .site-footer a {
 
 /*Do <i> nằm trong <a>, mà <a> không được set màu nên nó vẫn giữ mặc định (thường là màu tối) => Phải thay đổi màu của thẻ a (gọi cả thẻ a)*/
 .theloai-item p,
-.theloai-item a,
 .theloai-item i {
     color: white; /* Đổi icon và chữ link thành trắng */
     text-decoration: none; /* Bỏ gạch chân cho link */
@@ -409,6 +638,19 @@ body.dark .site-footer a {
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+/*Để cho ảnh và chữ xếp dọc nếu co lại tha vì nằm ngang*/
+@media (max-width: 768px) {
+    .fm-question {
+        flex-direction: column; /*Xếp dọc thay vì ngang*/
+        align-items: center;
+    }
+
+    .fm-question .img-choose,
+    .fm-question .choose {
+        max-width: 100%; /*Full width khi xếp dọc*/
+    }
 }
 
 /*============================== Footer =======================================*/

@@ -218,6 +218,12 @@
     <Content Include="Views\TrangChu\LienHe.cshtml" />
     <Content Include="Views\TrangChu\DangNhap.cshtml" />
     <Content Include="Views\TrangChu\DangKy.cshtml" />
+    <Content Include="Views\TrangChu\GioHang.cshtml" />
+    <Content Include="Views\TrangChu\VeMayBay.cshtml" />
+    <Content Include="Views\TrangChu\VeTau.cshtml" />
+    <Content Include="Views\TrangChu\VeXe.cshtml" />
+    <Content Include="Views\TrangChu\KhachSan.cshtml" />
+    <Content Include="Views\TrangChu\ThueXe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

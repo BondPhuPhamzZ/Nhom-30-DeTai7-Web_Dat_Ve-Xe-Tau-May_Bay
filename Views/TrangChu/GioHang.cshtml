@@ -1,0 +1,955 @@
+﻿
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+<style>
+/*===================== GIỎ HÀNG - SIMPLIFIED VERSION =====================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*===================== HEADER =====================*/
+.page-title {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-size: 38px;
+    font-weight: bold;
+    color: #001C40;
+}
+
+.page-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+/*===================== LAYOUT =====================*/
+.cart-content {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 25px;
+}
+
+/*===================== CART ITEMS =====================*/
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    border-color: #FFD700;
+}
+
+/*===================== ITEM HEADER =====================*/
+.item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.item-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #001C40;
+}
+
+.item-type {
+    background-color: #001C40;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.special-badge {
+    background-color: #FFD700;
+    color: #001C40;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/*===================== ITEM BODY =====================*/
+.item-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-route {
+    font-size: 20px;
+    font-weight: 600;
+    color: #001C40;
+    margin-bottom: 12px;
+}
+
+.route-arrow {
+    color: #FFD700;
+    margin: 0 8px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.info-label {
+    color: #666;
+    min-width: 90px;
+}
+
+.info-value {
+    color: #333;
+    font-weight: 500;
+}
+
+/*===================== ITEM PRICING =====================*/
+.item-pricing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-width: 180px;
+}
+
+.price-section {
+    text-align: right;
+}
+
+.price-label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.price-amount {
+    font-size: 22px;
+    font-weight: bold;
+    color: #001C40;
+}
+
+.quantity-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-label {
+    font-size: 13px;
+    color: #666;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    color: #001C40;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: #FFD700;
+}
+
+.quantity-input {
+    width: 45px;
+    height: 32px;
+    border: none;
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/*===================== ITEM ACTIONS =====================*/
+.item-actions {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 15px;
+}
+
+.save-later-btn,
+.remove-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.save-later-btn:hover {
+    background-color: #f0f0f0;
+    color: #001C40;
+}
+
+.remove-btn:hover {
+    background-color: #fee;
+    color: #e74c3c;
+}
+
+/*===================== SUMMARY SIDEBAR =====================*/
+.summary-sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.summary-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.summary-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #001C40;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.summary-label {
+    color: #666;
+}
+
+.summary-value {
+    color: #333;
+    font-weight: 600;
+}
+
+/*===================== PROMO SECTION =====================*/
+.promo-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.promo-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.promo-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.promo-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.promo-input:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.promo-btn {
+    padding: 10px 18px;
+    background-color: #001C40;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.promo-btn:hover {
+    background-color: #FFD700;
+    color: #001C40;
+}
+
+/*===================== TOTAL SECTION =====================*/
+.total-section {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 2px dashed #ddd;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.total-label {
+    font-size: 18px;
+    color: #001C40;
+    font-weight: 600;
+}
+
+.total-amount {
+    font-size: 28px;
+    font-weight: bold;
+    color: #001C40;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #FFD700;
+    color: #001C40;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+    background-color: #FFC700;
+}
+
+/*Không cần thiết*/
+/*.security-note {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #666;
+}*/
+
+/*===================== Benefits (không cần thiết) =====================*/
+/*.benefits {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+.benefit-item:last-child {
+    margin-bottom: 0;
+}
+
+.benefit-icon {
+    width: 18px;
+    height: 18px;
+    background-color: #001C40;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}*/
+
+/*===================== responsive cho web =====================*/
+
+/* Tablet */
+@@media (max-width: 1024px) {
+    .cart-content {
+        grid-template-columns: 1fr 320px;
+        gap: 20px;
+    }
+
+    .item-body {
+        flex-direction: column;
+    }
+
+    .item-pricing {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* Mobile */
+@@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 32px;
+        margin-top: 30px;
+    }
+
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-sidebar {
+        position: static;
+    }
+
+    .cart-item {
+        padding: 15px;
+    }
+
+    .item-route {
+        font-size: 18px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .info-label {
+        min-width: auto;
+        font-weight: 600;
+    }
+
+    .item-pricing {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .price-section {
+        text-align: left;
+    }
+}
+
+/* Small Mobile */
+@@media (max-width: 480px) {
+    .page-title {
+        font-size: 28px;
+    }
+
+    .item-header {
+        flex-wrap: wrap;
+    }
+
+    .item-body {
+        gap: 15px;
+    }
+
+    .item-pricing {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .quantity-section {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .item-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .save-later-btn,
+    .remove-btn {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+/*===================== chế độ Dark Mode =====================*/
+body.dark .page-title {
+    color: #f1f1f1;
+}
+
+body.dark .page-subtitle {
+    color: #ccc;
+}
+
+body.dark .cart-item {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+body.dark .cart-item:hover {
+    border-color: #FFD700;
+}
+
+body.dark .item-header {
+    border-bottom-color: #333;
+}
+
+body.dark .item-route {
+    color: #f1f1f1;
+}
+
+body.dark .info-label {
+    color: #999;
+}
+
+body.dark .info-value {
+    color: #e0e0e0;
+}
+
+body.dark .price-amount {
+    color: #FFD700;
+}
+
+body.dark .item-actions {
+    border-top-color: #333;
+}
+
+body.dark .summary-card {
+    background-color: #1a1a1a;
+}
+
+body.dark .summary-title {
+    color: #f1f1f1;
+    border-bottom-color: #333;
+}
+
+body.dark .summary-label {
+    color: #999;
+}
+
+body.dark .summary-value {
+    color: #e0e0e0;
+}
+
+body.dark .total-label,
+body.dark .total-amount {
+    color: #FFD700;
+}
+
+body.dark .promo-section,
+body.dark .benefits {
+    background-color: #0a0a0a;
+}
+
+body.dark .promo-input {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: white;
+}
+
+body.dark .benefit-item {
+    color: #e0e0e0;
+}
+</style>
+@*html giỏ hàng*@
+<div class="container">
+    <h1 class="page-title">Giỏ hàng của bạn</h1>
+    <p class="page-subtitle">Kiểm tra và hoàn tất đặt chỗ của bạn</p>
+
+    <div class="cart-content">
+        @*Lớp cha*@
+        <div class="cart-items">
+             @*Vé máy bay*@ 
+            <div class="cart-item">
+                <div class="item-header">
+                    <input type="checkbox" class="item-checkbox" checked>
+                    <span class="item-type">✈️ Vé máy bay</span>
+                    <span class="special-badge">Giá tốt nhất</span>
+                </div>
+                <div class="item-body">
+                    <div class="item-details">
+                        <div class="item-route">
+                            Hà Nội <span class="route-arrow">→</span> TP. Hồ Chí Minh
+                        </div>
+                        <div class="item-info">
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Ngày bay:</span>
+                                <span class="info-value">15/10/2025</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">⏰</span>
+                                <span class="info-label">Giờ khởi hành:</span>
+                                <span class="info-value">08:30 - 10:45</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">✈️</span>
+                                <span class="info-label">Hãng bay:</span>
+                                <span class="info-value">Vietnam Airlines</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">💺</span>
+                                <span class="info-label">Hạng vé:</span>
+                                <span class="info-value">Phổ thông</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pricing">
+                        <div class="price-section">
+                            <div class="price-label">Giá/người</div>
+                            <div class="price-amount">1.890.000₫</div>
+                        </div>
+                        <div class="quantity-section">
+                            <span class="quantity-label">Số vé:</span>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" type="button">−</button>
+                                <input type="number" class="quantity-input" value="2" min="1">
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="save-later-btn" type="button">💾 Lưu để đặt sau</button>
+                    <button class="remove-btn" type="button">🗑️ Xóa</button>
+                </div>
+            </div>
+
+             @*Khách sạn*@ 
+            <div class="cart-item">
+                <div class="item-header">
+                    <input type="checkbox" class="item-checkbox" checked>
+                    <span class="item-type">🏨 Khách sạn</span>
+                </div>
+                <div class="item-body">
+                    <div class="item-details">
+                        <div class="item-route">
+                            Khách sạn Mường Thanh Luxury Sài Gòn
+                        </div>
+                        <div class="item-info">
+                            <div class="info-row">
+                                <span class="info-icon">📍</span>
+                                <span class="info-label">Địa chỉ:</span>
+                                <span class="info-value">Quận 1, TP.HCM</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Check-in:</span>
+                                <span class="info-value">15/10/2025</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Check-out:</span>
+                                <span class="info-value">17/10/2025</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">🛏️</span>
+                                <span class="info-label">Loại phòng:</span>
+                                <span class="info-value">Deluxe - 2 giường đơn</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pricing">
+                        <div class="price-section">
+                            <div class="price-label">Giá/đêm</div>
+                            <div class="price-amount">850.000₫</div>
+                        </div>
+                        <div class="quantity-section">
+                            <span class="quantity-label">Số đêm:</span>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" type="button">−</button>
+                                <input type="number" class="quantity-input" value="2" min="1">
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="save-later-btn" type="button">💾 Lưu để đặt sau</button>
+                    <button class="remove-btn" type="button">🗑️ Xóa</button>
+                </div>
+            </div>
+
+             @*Vé tàu*@ 
+            <div class="cart-item">
+                <div class="item-header">
+                    <input type="checkbox" class="item-checkbox" checked>
+                    <span class="item-type">🚄 Vé tàu</span>
+                </div>
+                <div class="item-body">
+                    <div class="item-details">
+                        <div class="item-route">
+                            Hà Nội <span class="route-arrow">→</span> Huế
+                        </div>
+                        <div class="item-info">
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Ngày đi:</span>
+                                <span class="info-value">20/10/2025</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">⏰</span>
+                                <span class="info-label">Giờ khởi hành:</span>
+                                <span class="info-value">19:30</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">🚄</span>
+                                <span class="info-label">Tàu số:</span>
+                                <span class="info-value">SE3</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">🛏️</span>
+                                <span class="info-label">Loại chỗ:</span>
+                                <span class="info-value">Giường nằm khoang 6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pricing">
+                        <div class="price-section">
+                            <div class="price-label">Giá/vé</div>
+                            <div class="price-amount">450.000₫</div>
+                        </div>
+                        <div class="quantity-section">
+                            <span class="quantity-label">Số vé:</span>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" type="button">−</button>
+                                <input type="number" class="quantity-input" value="1" min="1">
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="save-later-btn" type="button">💾 Lưu để đặt sau</button>
+                    <button class="remove-btn" type="button">🗑️ Xóa</button>
+                </div>
+            </div>
+
+             @*Vé xe*@ 
+            <div class="cart-item">
+                <div class="item-header">
+                    <input type="checkbox" class="item-checkbox">
+                    <span class="item-type">🚌 Vé xe</span>
+                </div>
+                <div class="item-body">
+                    <div class="item-details">
+                        <div class="item-route">
+                            TP. Hồ Chí Minh <span class="route-arrow">→</span> Đà Lạt
+                        </div>
+                        <div class="item-info">
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Ngày đi:</span>
+                                <span class="info-value">22/10/2025</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">⏰</span>
+                                <span class="info-label">Giờ khởi hành:</span>
+                                <span class="info-value">21:00</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">🚌</span>
+                                <span class="info-label">Nhà xe:</span>
+                                <span class="info-value">Phương Trang (Futa Bus)</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">💺</span>
+                                <span class="info-label">Loại xe:</span>
+                                <span class="info-value">Giường nằm VIP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pricing">
+                        <div class="price-section">
+                            <div class="price-label">Giá/vé</div>
+                            <div class="price-amount">250.000₫</div>
+                        </div>
+                        <div class="quantity-section">
+                            <span class="quantity-label">Số vé:</span>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" type="button">−</button>
+                                <input type="number" class="quantity-input" value="2" min="1">
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="save-later-btn" type="button">💾 Lưu để đặt sau</button>
+                    <button class="remove-btn" type="button">🗑️ Xóa</button>
+                </div>
+            </div>
+
+             @*Thuê xe*@ 
+            <div class="cart-item">
+                <div class="item-header">
+                    <input type="checkbox" class="item-checkbox">
+                    <span class="item-type">🚗 Thuê xe</span>
+                </div>
+                <div class="item-body">
+                    <div class="item-details">
+                        <div class="item-route">
+                            Toyota Vios - Tự lái
+                        </div>
+                        <div class="item-info">
+                            <div class="info-row">
+                                <span class="info-icon">📍</span>
+                                <span class="info-label">Nhận xe:</span>
+                                <span class="info-value">Sân bay Tân Sơn Nhất</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Ngày nhận:</span>
+                                <span class="info-value">15/10/2025 - 10:00</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">📅</span>
+                                <span class="info-label">Ngày trả:</span>
+                                <span class="info-value">17/10/2025 - 10:00</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-icon">⚙️</span>
+                                <span class="info-label">Loại xe:</span>
+                                <span class="info-value">Sedan 4 chỗ - Số tự động</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-pricing">
+                        <div class="price-section">
+                            <div class="price-label">Giá/ngày</div>
+                            <div class="price-amount">550.000₫</div>
+                        </div>
+                        <div class="quantity-section">
+                            <span class="quantity-label">Số ngày:</span>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" type="button">−</button>
+                                <input type="number" class="quantity-input" value="2" min="1">
+                                <button class="quantity-btn" type="button">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="save-later-btn" type="button">💾 Lưu để đặt sau</button>
+                    <button class="remove-btn" type="button">🗑️ Xóa</button>
+                </div>
+            </div>
+        </div>
+
+        @*Phần tóm tắt vé bên phải*@
+        <div class="summary-sidebar">
+            <div class="summary-card">
+                <h3 class="summary-title">Tóm tắt đơn hàng</h3>
+
+                <div class="summary-row">
+                    <span class="summary-label">Vé máy bay (x2)</span>
+                    <span class="summary-value">3.780.000₫</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Khách sạn (2 đêm)</span>
+                    <span class="summary-value">1.700.000₫</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Vé tàu (x1)</span>
+                    <span class="summary-value">450.000₫</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Phí dịch vụ</span>
+                    <span class="summary-value">80.000₫</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Thuế VAT</span>
+                    <span class="summary-value">601.000₫</span>
+                </div>
+
+                <div class="promo-section">
+                    <div class="promo-title">Mã giảm giá</div>
+                    <div class="promo-input-group">
+                        <input type="text" class="promo-input" placeholder="Nhập mã giảm giá">
+                        <button class="promo-btn" type="button">Áp dụng</button>
+                    </div>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-row">
+                        <span class="total-label">Tổng cộng</span>
+                        <span class="total-amount">6.611.000₫</span>
+                    </div>
+                    <button class="checkout-btn" type="button">Tiến hành thanh toán</button>
+                    @*<div class="security-note">🔒 Giao dịch bảo mật và an toàn</div>*@
+                </div>
+
+                @*<div class="benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Hoàn tiền 100% nếu hủy trong 24h</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Hỗ trợ khách hàng 24/7</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">✓</span>
+                        <span>Giá tốt nhất được đảm bảo</span>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+

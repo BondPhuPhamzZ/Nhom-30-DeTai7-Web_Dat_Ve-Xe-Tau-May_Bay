@@ -22,6 +22,7 @@
     <div class="nav-bar">
         <div class="web-logo">
             <a href="Index"><img src="~/img/logo-web-ve.png" alt="Three Horizon" /></a>
+            <span class="brand-name">Three Horizon</span>
         </div>
 
         <div class="nav-bar-level1">
@@ -36,10 +37,30 @@
                 <input type="checkbox" id="theme-toggle">
                 <span class="slider"></span>
             </label>
+
             @*Giỏ Hàng*@
-            <div class="cart">
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+            <div class="cart-container">
+                <a href="GioHang" class="cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <div class="cart-dropdown">
+                    <p><strong>Sản phẩm của bạn</strong></p>
+                    <div class="cart-item">
+                        <span class="item-name">Vé máy bay - 2 vé</span>
+                        <span class="item-price">4.000.000đ</span>
+                    </div>
+                    <div class="cart-item">
+                        <span class="item-name">Tour Đà Nẵng - 1 tour</span>
+                        <span class="item-price">6.500.000đ</span>
+                    </div>
+                    <div class="cart-item">
+                        <span class="item-name">Vé xem ca nhạc - 3 vé</span>
+                        <span class="item-price">1.500.000đ</span>
+                    </div>
+                    <a href="GioHang" class="view-cart">Xem giỏ hàng</a>
+                </div>
             </div>
+
             @*Nút đăng nhập hoặc đăng ký*@
             <div class="container">
                 <div class="nav-bar-con-dang-nhap">

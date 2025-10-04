@@ -4,21 +4,23 @@
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
 }
 <style>
+    #content h2{
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 10px;
+    }
+
     .contact-form {
         max-width: 600px;
-        margin: 50px auto;
+        margin: 0px auto;
         padding: 20px;
         border-radius: 10px;
         background: #001C40;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         border: 1px solid white;
         line-height: 1.6;
-    }
-
-    .contact-form h2 {
-        text-align: center;
-/*        margin-bottom: 10px;*/
-        color: white;
+        margin-top: 20px;
+        margin-bottom: 30px;
     }
 
     .contact-form label {
@@ -68,8 +70,8 @@
 </style>
 @*HTML Trang liên hệ ở đây*@
 <div id="content">
+    <h2>Liên hệ với chúng tôi</h2>
     <div class="contact-form">
-        <h2>Liên hệ với chúng tôi</h2>
         <form class="need-mg-top" action="#" method="post">
             <div class="need-mg-top">
                 <label for="name">Họ và tên</label>

@@ -11,8 +11,9 @@
         margin: 20px auto;
         max-width: 1240px;
         overflow: hidden;
-        height: 400px;
+        height: 450px;
         color: white;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
 
     .khampha-1 img {
@@ -20,16 +21,18 @@
         width: 100%;
         height: 100%;
         inset: 0; /* top:0; right:0; bottom:0; left:0; */
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         z-index: 0;
         object-fit: cover;
-        filter: brightness(0.65);
-        transition: transform 0.3s, filter 0.3s;
-        display: block;
+        filter: brightness(0.6);
+        transition: transform 0.5s ease, filter 0.3s;
     }
 
-    /*Container chứa chữ và nút trên ảnh banner*/
+    .khampha-1:hover img {
+        transform: scale(1.05);
+        filter: brightness(0.7);
+    }
+
+    /*Container chứa chữ và nút (nội dung) trên ảnh banner*/
     .khampha-1 .content-1 {
         position: absolute;
         inset: 0; 
@@ -39,124 +42,329 @@
         align-items: center;     
         justify-content: center;  
         text-align: center;
-        padding: 20px;
+        /*padding: 20px;*/
+        padding: 30px 20px;
         box-sizing: border-box;
     }
 
     /* Giữ chữ gọn, không tràn nhờ max-width */
     .khampha-1 .content-1 p {
-        font-size: 20px;
-        margin: 0 0 8px 0;
+        font-size: 22px;
+        /*margin: 0 0 8px 0;*/
+        margin: 0 0 12px 0;
         max-width: 900px;
-        line-height: 1.3;
-        text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+        line-height: 1.4;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        font-weight: 500;
     }
 
     .khampha-1 .content-1 h2 {
-        font-size: 40px;
-        margin: 10px 0;
+        font-size: 48px;
+        /*margin: 10px 0;*/
+        margin: 10px 0 30px 0;
         font-weight: bold;
-        line-height: 1.1;
+        line-height: 1.2;
         max-width: 900px;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* chữ có bóng */
+        text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
     }
 
     .khampha-1 .content-1 .btn-chon-ve {
-        margin-bottom: 10px;
+        /* margin-bottom: 10px;*/
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
     }
 
     .khampha-1 .content-1 .btn-chon-ve a {
         display: inline-block;
-        margin-right: 15px;
-        padding: 10px 20px;
+        /*margin-right: 15px;*/
+        /*padding: 10px 20px;*/
+        padding: 14px 28px;
         background-color: white;
         color: #001C40;
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: 6px;
         font-weight: bold;
-        transition: background 0.3s, color 0.3s;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
     
     .khampha-1 .content-1 .btn-chon-ve a:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        background-color: yellow;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        background-color: #FFD700;
     }
 
     /* ================ Phần các nơi nên đi trong Khám Phá (place card) ===============*/
-    .top-country .province-row {
-        display: flex;
-        justify-content: space-between;
-        margin: 20px auto;
-        max-width: 1200px;
-        padding: 0 10px;
-        gap: 20px;
-        align-items: stretch; /* Chiều cao các card trong 1 hàng bằng nhau */
+    /*Chữ h2 đầu tiên*/
+    #content .vietnam-toi-yeu {
+        text-align: center;
+        font-size: 45px;
+        font-weight: bold;
+        margin-top: 80px;
+        margin-bottom: 40px;
+        color: #001C40;
     }
 
-    .country-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.3s;
+    /*===================== GRID LAYOUT CHO CARDS =====================*/
+    .top-country {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .province-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    /*===================== COUNTRY CARD =====================*/
+    .country-item {
+        display: flex;
+        flex-direction: column;
+        background-color: #001C40;
+        color: #f1f1f1;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
     }
 
     .country-item:hover {
         transform: translateY(-10px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         background-color: #003366;
+    }   
+
+    .country-item img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
     }
 
-    /*Chữ h2 đầu tiên*/
-    #content .vietnam-toi-yeu {
-        text-align: center;
-        font-size: 50px;
+    .country-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .country-item h3 {
+        font-size: 26px;
         font-weight: bold;
-        margin-top: 100px;
-        margin-bottom: 30px;
+        margin: 20px 15px 10px;
+        color: white;
     }
 
-    .country-item {
-        flex: 1; /* mỗi card chiếm không gian bằng nhau */
-        display: flex;
-        flex-direction: column; /* xếp nội dung theo cột */
-        justify-content: space-between; /* đẩy nút xuống cuối => Do dùng thuộc tính display: flex; flex-direction: column; thì Phần tử đầu tiên nằm sát trên cùng, Phần tử cuối cùng nằm sát dưới cùng, Các phần tử ở giữa được phân bổ khoảng cách đều nhau */
-        margin-top: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        text-align: center;
-        align-items: center;
-        background-color: #001C40;
-        color: #f1f1f1;
-        transition: transform 0.3s;
-        cursor: pointer;
-        padding: 10px; /* thêm khoảng cách bên trong */
-        /*Không nên set width và height => cản trở responsive*/
-    }
-
-    .country-item h3,
     .country-item p {
-        flex-grow: 1; /* phần text chiếm không gian còn lại */
+        flex-grow: 1;
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0 15px 15px;
+        color: #e0e0e0;
     }
 
     .country-item a {
-        align-self: center; /* căn nút ở giữa */
-        margin: 10px 0 20px 0; /* khoảng cách trên nút */
-        padding: 10px 20px; /*Khoảng cách chữ trong nút so với viền nút*/
+        display: block;
+        text-align: center;
+        margin: 0 15px 20px;
+        padding: 12px 24px;
         background-color: white;
         color: #001C40;
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: 8px;
         font-weight: bold;
-        transition: background 0.3s, color 0.3s;
-        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
     }
 
     .country-item a:hover {
-         background-color: yellow;
-         color: #001C40;
+        background-color: #FFD700;
+        transform: scale(1.05);
+    }
+
+    /*===================== RESPONSIVE =====================*/
+
+    /* Tablet - 1024px */
+    @@media (max-width: 1024px) {
+    .khampha-1 {
+        height: 400px;
+    }
+    
+    .khampha-1 .content-1 h2 {
+        font-size: 42px;
+    }
+    
+    .khampha-1 .content-1 p {
+        font-size: 20px;
+    }
+    
+    #content .vietnam-toi-yeu {
+        font-size: 40px;
+    }
+    
+    .province-row {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    }
+
+    /* Mobile - 768px */
+    @@media (max-width: 768px) {
+    .khampha-1 {
+        height: 350px;
+        margin: 15px;
+        border-radius: 10px;
+    }
+    
+    .khampha-1 .content-1 {
+        padding: 20px 15px;
+    }
+    
+    .khampha-1 .content-1 p {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .khampha-1 .content-1 h2 {
+        font-size: 32px;
+        margin: 8px 0 20px 0;
+    }
+    
+    .khampha-1 .content-1 .btn-chon-ve {
+        gap: 10px;
+    }
+    
+    .khampha-1 .content-1 .btn-chon-ve a {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    #content .vietnam-toi-yeu {
+        font-size: 36px;
+        margin-top: 60px;
+        margin-bottom: 30px;
+    }
+    
+    .top-country {
+        padding: 0 15px;
+    }
+    
+    .province-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .country-item img {
+        height: 200px;
+    }
+    
+    .country-item h3 {
+        font-size: 24px;
+        margin: 15px 12px 8px;
+    }
+    
+    .country-item p {
+        font-size: 14px;
+        margin: 0 12px 12px;
+    }
+    
+    .country-item a {
+        margin: 0 12px 15px;
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+    }
+
+    /* Small Mobile - 480px */
+    @@media (max-width: 480px) {
+    .khampha-1 {
+        height: 300px;
+        margin: 10px;
+    }
+    
+    .khampha-1 .content-1 p {
+        font-size: 16px;
+    }
+    
+    .khampha-1 .content-1 h2 {
+        font-size: 26px;
+        margin: 8px 0 15px 0;
+    }
+    
+    .khampha-1 .content-1 .btn-chon-ve {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .khampha-1 .content-1 .btn-chon-ve a {
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    #content .vietnam-toi-yeu {
+        font-size: 30px;
+        margin-top: 50px;
+        margin-bottom: 25px;
+        padding: 0 10px;
+    }
+    
+    .top-country {
+        padding: 0 10px;
+    }
+    
+    .country-item img {
+        height: 180px;
+    }
+    
+    .country-item h3 {
+        font-size: 22px;
+    }
+    
+    .country-item p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    }
+
+    /*===================== DARK MODE SUPPORT =====================*/
+    body.dark #content .vietnam-toi-yeu {
+        color: #f1f1f1;
+    }
+
+    body.dark .country-item {
+        background-color: #fffcf4;
+        color: #001C40;
+    }
+
+    body.dark .country-item:hover {
+        background-color: #f0e5d0;
+    }
+
+    body.dark .country-item h3 {
+        color: #001C40;
+    }
+
+    body.dark .country-item p {
+        color: #333;
+    }
+
+    body.dark .country-item a {
+        background-color: #001C40;
+        color: white;
+    }
+
+    body.dark .country-item a:hover {
+        background-color: #FFD700;
+        color: #001C40;
     }
 </style>
 @*HTML trang khám phá nằm ở đây*@
@@ -167,9 +375,9 @@
             <p>Bạn vẫn chưa quyết định được điểm đến?</p>
             <h2>Khám phá mọi điểm đến</h2>
             <div class="btn-chon-ve">
-                <a href="#">Tìm vé máy bay đi mọi nơi</a>
-                <a href="#">Tìm vé tàu</a>
-                <a href="#">Tìm vé xe</a>
+                <a href="DatVe">Tìm vé máy bay đi mọi nơi</a>
+                <a href="DatVe">Tìm vé tàu</a>
+                <a href="DatVe">Tìm vé xe</a>
             </div>
         </div>
         <img src="~/img/khampha-1.jpg" alt="khám phá 1" />
