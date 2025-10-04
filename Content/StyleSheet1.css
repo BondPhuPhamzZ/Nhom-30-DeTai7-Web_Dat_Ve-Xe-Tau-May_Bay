@@ -640,6 +640,11 @@ body.dark .nav-bar-level2-item a:hover {
     margin-bottom: 20px;
 }
 
+/*Đảo chiều block => trông bắt mắt hơn*/
+.choose-three-horizon .fm-question:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
 /*Để cho ảnh và chữ xếp dọc nếu co lại tha vì nằm ngang*/
 @media (max-width: 768px) {
     .fm-question {
@@ -650,6 +655,11 @@ body.dark .nav-bar-level2-item a:hover {
     .fm-question .img-choose,
     .fm-question .choose {
         max-width: 100%; /*Full width khi xếp dọc*/
+    }
+
+    /*Thêm đoạn này để không lỗi khi reverse box*/
+    .choose-three-horizon .fm-question:nth-child(even) {
+        flex-direction: column; /* override lại block 2 */
     }
 }
 
@@ -738,5 +748,11 @@ body.dark .nav-bar-level2-item a:hover {
     padding-top: 15px;
     font-size: 14px;
     opacity: 0.8;
+}
+
+/*Google map*/
+.gg-map{
+    border-radius: 10px;
+    object-fit: cover;
 }
 

@@ -149,14 +149,17 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\australia-3.jpg" />
+    <Content Include="img\bus-4.jpg" />
     <Content Include="img\danang-2.jpg" />
     <Content Include="img\danang-3.jpg" />
+    <Content Include="img\flight-ticket-4.jpg" />
     <Content Include="img\france-2.jpg" />
     <Content Include="img\germany-2.jpg" />
     <Content Include="img\hanoi-2.jpg" />
     <Content Include="img\hanoi-3.jpg" />
     <Content Include="img\hochiminh-2.jpg" />
     <Content Include="img\hochiminh-3.jpg" />
+    <Content Include="img\hotel-4.jpg" />
     <Content Include="img\hue-2.jpg" />
     <Content Include="img\hue-3.jpg" />
     <Content Include="img\italy-2.jpg" />
@@ -177,6 +180,7 @@
     <Content Include="img\spain-2.jpg" />
     <Content Include="img\Switzerlands-2.jpg" />
     <Content Include="img\thailand-3.jpg" />
+    <Content Include="img\train-4.jpg" />
     <Content Include="img\trip-3.jpg" />
     <Content Include="img\VietNam.jpg" />
     <Content Include="img\vungtau-3.jpg" />
