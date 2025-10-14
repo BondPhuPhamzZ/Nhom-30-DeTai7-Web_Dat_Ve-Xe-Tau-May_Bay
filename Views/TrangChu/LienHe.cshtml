@@ -2,93 +2,30 @@
 @{
     ViewBag.Title = "LienHe";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+    <link href="~/Content/MyMainStyle/LienHeStyle.css" rel="stylesheet" />
 }
-<style>
-    #content h2{
-        text-align: center;
-        font-size: 60px;
-        margin-bottom: 10px;
-    }
 
-    .contact-form {
-        max-width: 600px;
-        margin: 0px auto;
-        padding: 20px;
-        border-radius: 10px;
-        background: #001C40;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        border: 1px solid white;
-        line-height: 1.6;
-        margin-top: 20px;
-        margin-bottom: 30px;
-    }
-
-    .contact-form label {
-        display: block;
-        margin: 10px 0 5px;
-        font-weight: 500;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 14px;
-        box-sizing: border-box;
-        transition: border-color 0.3s;
-    }
-
-    .contact-form button {
-        margin-top: 15px;
-        width: 100%;
-        padding: 12px;
-        background: white;
-        color: #001C40;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .contact-form button:hover {
-        background: #ffcc00;
-        color: #001C40;
-    }
-
-    .contact-form .need-mg-top {
-        margin-top: 15px;
-    }
-
-    .need-mg-top label {
-        font-weight: bold;
-        color: white;
-    }
-</style>
 @*HTML Trang liên hệ ở đây*@
 <div id="content">
     <h2>Liên hệ với chúng tôi</h2>
     <div class="contact-form">
-        <form class="need-mg-top" action="#" method="post">
-            <div class="need-mg-top">
+        <form action="#" method="post"> @*action là địa chỉ mà form sẽ gửi đến sau khi nhấn gửi, method là phương thức gửi dữ liệu => có 2 dạng là get và post*@
+            <div class="form-group">
                 <label for="name">Họ và tên</label>
                 <input type="text" id="name" name="name" placeholder="Nhập họ tên..." required>
             </div>
 
-            <div class="need-mg-top">
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Nhập email..." required>
             </div>
 
-            <div class="need-mg-top">
+            <div class="form-group">
                 <label for="phone">Số điện thoại</label>
                 <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại...">
             </div>
 
-            <div class="need-mg-top">
+            <div class="form-group">
                 <label for="message">Nội dung</label>
                 <textarea id="message" name="message" rows="5" placeholder="Viết nội dung tại đây..." required></textarea>
             </div>

@@ -1,0 +1,89 @@
+﻿body {
+}
+    .fm-dangnhap {
+        max-width: 500px;
+        width: 100%;
+        margin: 50px auto;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #0A3D62 0%, #E8630A 180%);
+        color: #f1f1f1;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        line-height: 1.6;
+    }
+
+    #content h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .fm-dangnhap input[type="text"],
+    .fm-dangnhap input[type="password"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f1f1f1; 
+        color: #333; 
+        font-size: 14px;
+    }
+
+    .fm-dangnhap input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+        cursor: pointer;
+        width: auto;
+    }
+
+    /*Nút đăng nhập của form*/
+    .fm-dangnhap button {
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+        border: none;
+        border-radius: 5px;
+        color: #001C40;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 10px;
+    }
+
+    .fm-dangnhap button:hover {
+        background-color: #FFC700;
+    }
+
+    .fm-dangnhap a {
+        display: block;
+        text-align: right;
+        margin-top: 15px;
+        font-size: 14px;
+        color: #ccc;
+        text-decoration: none;
+    }
+
+    .fm-dangnhap a:hover {
+        color: #fff;
+    }
+
+    .form-group {
+        margin-bottom: 20px; 
+    }
+
+    /*form-group cuối*/
+    .form-group:last-of-type {
+        margin-bottom: 15px; 
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center; 
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .remember-me label {
+        cursor: pointer;
+    }

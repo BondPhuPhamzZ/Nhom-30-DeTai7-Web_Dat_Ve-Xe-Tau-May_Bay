@@ -2,380 +2,9 @@
 @{
     ViewBag.Title = "KhamPha";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+    <link href="~/Content/MyMainStyle/KhamPhaStyle.css" rel="stylesheet" />
 }
-<style>
-    /*Phần banner */
-    .khampha-1 {
-        position: relative;
-        border-radius: 10px;
-        margin: 20px auto;
-        max-width: 1240px;
-        overflow: hidden;
-        height: 450px;
-        color: white;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    }
 
-    .khampha-1 img {
-        position: absolute; /*Cho ảnh là abaolute để nó chỉ là nền*/
-        width: 100%;
-        height: 100%;
-        inset: 0; /* top:0; right:0; bottom:0; left:0; */
-        z-index: 0;
-        object-fit: cover;
-        filter: brightness(0.6);
-        transition: transform 0.5s ease, filter 0.3s;
-    }
-
-    .khampha-1:hover img {
-        transform: scale(1.05);
-        filter: brightness(0.7);
-    }
-
-    /*Container chứa chữ và nút (nội dung) trên ảnh banner*/
-    .khampha-1 .content-1 {
-        position: absolute;
-        inset: 0; 
-        z-index: 2;
-        display: flex; 
-        flex-direction: column;
-        align-items: center;     
-        justify-content: center;  
-        text-align: center;
-        /*padding: 20px;*/
-        padding: 30px 20px;
-        box-sizing: border-box;
-    }
-
-    /* Giữ chữ gọn, không tràn nhờ max-width */
-    .khampha-1 .content-1 p {
-        font-size: 22px;
-        /*margin: 0 0 8px 0;*/
-        margin: 0 0 12px 0;
-        max-width: 900px;
-        line-height: 1.4;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-        font-weight: 500;
-    }
-
-    .khampha-1 .content-1 h2 {
-        font-size: 48px;
-        /*margin: 10px 0;*/
-        margin: 10px 0 30px 0;
-        font-weight: bold;
-        line-height: 1.2;
-        max-width: 900px;
-        text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
-    }
-
-    .khampha-1 .content-1 .btn-chon-ve {
-        /* margin-bottom: 10px;*/
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .khampha-1 .content-1 .btn-chon-ve a {
-        display: inline-block;
-        /*margin-right: 15px;*/
-        /*padding: 10px 20px;*/
-        padding: 14px 28px;
-        background-color: white;
-        color: #001C40;
-        text-decoration: none;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-    
-    .khampha-1 .content-1 .btn-chon-ve a:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-        background-color: #FFD700;
-    }
-
-    /* ================ Phần các nơi nên đi trong Khám Phá (place card) ===============*/
-    /*Chữ h2 đầu tiên*/
-    #content .vietnam-toi-yeu {
-        text-align: center;
-        font-size: 45px;
-        font-weight: bold;
-        margin-top: 80px;
-        margin-bottom: 40px;
-        color: #001C40;
-    }
-
-    /*===================== GRID LAYOUT CHO CARDS =====================*/
-    .top-country {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .province-row {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-    }
-
-    /*===================== COUNTRY CARD =====================*/
-    .country-item {
-        display: flex;
-        flex-direction: column;
-        background-color: #001C40;
-        color: #f1f1f1;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .country-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-        background-color: #003366;
-    }   
-
-    .country-item img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .country-item:hover img {
-        transform: scale(1.1);
-    }
-
-    .country-item h3 {
-        font-size: 26px;
-        font-weight: bold;
-        margin: 20px 15px 10px;
-        color: white;
-    }
-
-    .country-item p {
-        flex-grow: 1;
-        font-size: 15px;
-        line-height: 1.6;
-        margin: 0 15px 15px;
-        color: #e0e0e0;
-    }
-
-    .country-item a {
-        display: block;
-        text-align: center;
-        margin: 0 15px 20px;
-        padding: 12px 24px;
-        background-color: white;
-        color: #001C40;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .country-item a:hover {
-        background-color: #FFD700;
-        transform: scale(1.05);
-    }
-
-    /*===================== RESPONSIVE =====================*/
-
-    /* Tablet - 1024px */
-    @@media (max-width: 1024px) {
-    .khampha-1 {
-        height: 400px;
-    }
-    
-    .khampha-1 .content-1 h2 {
-        font-size: 42px;
-    }
-    
-    .khampha-1 .content-1 p {
-        font-size: 20px;
-    }
-    
-    #content .vietnam-toi-yeu {
-        font-size: 40px;
-    }
-    
-    .province-row {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-    }
-    }
-
-    /* Mobile - 768px */
-    @@media (max-width: 768px) {
-    .khampha-1 {
-        height: 350px;
-        margin: 15px;
-        border-radius: 10px;
-    }
-    
-    .khampha-1 .content-1 {
-        padding: 20px 15px;
-    }
-    
-    .khampha-1 .content-1 p {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    
-    .khampha-1 .content-1 h2 {
-        font-size: 32px;
-        margin: 8px 0 20px 0;
-    }
-    
-    .khampha-1 .content-1 .btn-chon-ve {
-        gap: 10px;
-    }
-    
-    .khampha-1 .content-1 .btn-chon-ve a {
-        padding: 12px 20px;
-        font-size: 14px;
-    }
-    
-    #content .vietnam-toi-yeu {
-        font-size: 36px;
-        margin-top: 60px;
-        margin-bottom: 30px;
-    }
-    
-    .top-country {
-        padding: 0 15px;
-    }
-    
-    .province-row {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-    }
-    
-    .country-item img {
-        height: 200px;
-    }
-    
-    .country-item h3 {
-        font-size: 24px;
-        margin: 15px 12px 8px;
-    }
-    
-    .country-item p {
-        font-size: 14px;
-        margin: 0 12px 12px;
-    }
-    
-    .country-item a {
-        margin: 0 12px 15px;
-        padding: 10px 20px;
-        font-size: 15px;
-    }
-    }
-
-    /* Small Mobile - 480px */
-    @@media (max-width: 480px) {
-    .khampha-1 {
-        height: 300px;
-        margin: 10px;
-    }
-    
-    .khampha-1 .content-1 p {
-        font-size: 16px;
-    }
-    
-    .khampha-1 .content-1 h2 {
-        font-size: 26px;
-        margin: 8px 0 15px 0;
-    }
-    
-    .khampha-1 .content-1 .btn-chon-ve {
-        flex-direction: column;
-        gap: 8px;
-        width: 100%;
-        max-width: 280px;
-    }
-    
-    .khampha-1 .content-1 .btn-chon-ve a {
-        width: 100%;
-        padding: 10px 16px;
-        font-size: 13px;
-    }
-    
-    #content .vietnam-toi-yeu {
-        font-size: 30px;
-        margin-top: 50px;
-        margin-bottom: 25px;
-        padding: 0 10px;
-    }
-    
-    .top-country {
-        padding: 0 10px;
-    }
-    
-    .country-item img {
-        height: 180px;
-    }
-    
-    .country-item h3 {
-        font-size: 22px;
-    }
-    
-    .country-item p {
-        font-size: 13px;
-        line-height: 1.5;
-    }
-    }
-
-    /*===================== DARK MODE SUPPORT =====================*/
-    body.dark #content .vietnam-toi-yeu {
-        color: #f1f1f1;
-    }
-
-    body.dark .country-item {
-        background-color: #fffcf4;
-        color: #001C40;
-    }
-
-    body.dark .country-item:hover {
-        background-color: #f0e5d0;
-    }
-
-    body.dark .country-item h3 {
-        color: #001C40;
-    }
-
-    body.dark .country-item p {
-        color: #333;
-    }
-
-    body.dark .country-item a {
-        background-color: #001C40;
-        color: white;
-    }
-
-    body.dark .country-item a:hover {
-        background-color: #FFD700;
-        color: #001C40;
-    }
-
-    /* ============== Cẩm nang du lịch ================*/
-    .cam-nang-text{
-        font-size: 50px;
-        text-align: center;
-        font-weight: bold;
-        margin-top: 80px;
-        margin-bottom: 50px;
-    }
-</style>
 @*HTML trang khám phá nằm ở đây*@
 <div id="content">
     @*Banner khám phá*@
@@ -402,19 +31,19 @@
                 <img src="~/img/hanoi-2.jpg" alt="Hà Nội" />
                 <h3>Hà Nội</h3>
                 <p>Thủ đô ngàn năm văn hiến, điểm đến không thể bỏ qua.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/danang-2.jpg" alt="Đà Nẵng" />
                 <h3>Đà Nẵng</h3>
                 <p>Thành phố biển xinh đẹp với nhiều bãi biển nổi tiếng.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/hochiminh-2.jpg" alt="Hồ Chí Minh" />
                 <h3>Hồ Chí Minh</h3>
                 <p>Trung tâm kinh tế sôi động và hiện đại của Việt Nam.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
         </div>
         @*Hàng thứ 2*@
@@ -423,19 +52,19 @@
                 <img src="~/img/phuquoc-2.jpg" alt="Phú Quốc" />
                 <h3>Phú Quốc</h3>
                 <p>Hòn đảo ngọc với bãi biển tuyệt đẹp và thiên nhiên hoang sơ.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/hue-2.jpg" alt="Huế" />
                 <h3>Huế</h3>
                 <p>Cố đô Huế với di sản văn hóa phong phú và kiến trúc cổ kính.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/NhaTrang-2.jpg" alt="Nha Trang" />
                 <h3>Nha Trang</h3>
                 <p>Thành phố biển nổi tiếng với bãi biển dài và nước biển trong xanh.</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
         </div>
     </div>
@@ -448,19 +77,19 @@
                 <img src="~/img/germany-2.jpg" alt="Đức" />
                 <h3>Đức</h3>
                 <p>Trái tim của châu Âu với những lâu đài cổ tích, thành phố hiện đại và lễ hội bia Oktoberfest nổi tiếng</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/france-2.jpg" alt="Pháp" />
                 <h3>Pháp</h3>
                 <p>Xứ sở tình yêu với Paris hoa lệ, tháp Eiffel biểu tượng và ẩm thực tinh tế như các loại bánh nướng trứ danh</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/italy-2.jpg" alt="Italy" />
                 <h3>Italy</h3>
                 <p>Nơi hội tụ nghệ thuật, thời trang và những công trình lịch sử như Colosseum, Venice lãng mạn</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
         </div>
         @*Châu Âu dòng 2*@
@@ -469,19 +98,19 @@
                 <img src="~/img/spain-2.jpg" alt="Tây Ban Nha" />
                 <h3>Tây Ban Nha</h3>
                 <p>Đất nước sôi động với lễ hội đường phố, vũ điệu Flamenco và bãi biển Địa Trung Hải rực nắng</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/netherlands-2.jpg" alt="Hà Lan" />
                 <h3>Hà Lan</h3>
                 <p>Xứ sở hoa tulip, cối xay gió và hệ thống kênh đào tuyệt đẹp, đắm chìm vào thơ mộng của khung cảnh</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
             <div class="country-item">
                 <img src="~/img/Switzerlands-2.jpg" alt="Thụy Sĩ" />
                 <h3>Thụy Sĩ</h3>
                 <p>Thiên đường núi non với dãy Alps hùng vĩ, hồ trong xanh và đồng hồ chính xác bậc nhất thế giới</p>
-                <a href="#">Đặt Vé Ngay</a>
+                <a href="DatVe">Đặt Vé Ngay</a>
             </div>
         </div>
     </div>

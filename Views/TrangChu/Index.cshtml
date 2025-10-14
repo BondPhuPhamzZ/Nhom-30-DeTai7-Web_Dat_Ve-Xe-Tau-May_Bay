@@ -5,6 +5,22 @@
 }
 @*HTML trang chủ nằm ở đây*@
 @* ======================== Phần content (thân web) ở đây =======================*@
+<style>
+/*=================== responsive cho banner =================== */
+/* Cho màn hình Tablet */
+@@media (max-width: 768px) {
+    .banner {
+        min-height: 500px; /* Giảm chiều cao banner */
+        margin-bottom: 60px; /* Giảm khoảng cách dưới so với lúc đầy */
+    }
+
+    .search-box h1 {
+        font-size: 30px; /* Giảm kích thước chữ cho vừa màn hình */
+        margin-bottom: 30px;
+    }
+}
+</style>
+
 <div id="content">
     @*Phần banner*@
     <div class="banner">
@@ -15,30 +31,47 @@
             <h1>Đi khắp muôn nơi cùng Three Horizon</h1>
             <form>
                 <div class="form-row">
-                    <select>
-                        <option>Khứ Hồi</option>
-                        <option>Một Chiều</option>
-                    </select>
-                    <label for="Tu"> Đi Từ: </label>
-                    <input type="text" placeholder="Việt Nam (VN)" required />
-                    <label for="Den">Đến Nơi: </label>
-                    <input type="text" placeholder="Hà Nội (HAN)" required />
+                    <div class="form-group">
+                        <label for="flight-type">Loại vé:</label>
+                        <select id="flight-type">
+                            <option>Khứ Hồi</option>
+                            <option>Một Chiều</option>
+                        </select>
+                    </div>
 
-                    <label for="ngaydi">Ngày Đi</label>
-                    <input type="date" name="ngaydi" id="ngaydi" required />
+                    <div class="form-group">
+                        <label for="Tu"> Đi Từ: </label>
+                        <input type="text" placeholder="Việt Nam (VN)" required />
+                    </div>
 
-                    <label for="ngayve">Ngày Về</label>
-                    <input type="date" name="ngayve" id="ngayve" required />
+                    <div class="form-group">
+                        <label for="Den">Đến Nơi: </label>
+                        <input type="text" placeholder="Hà Nội (HAN)" required />
+                    </div>
 
-                    <label for="soluonghanhkhach">Số Lượng</label>
-                    <input type="number" name="soluonghanhkhach" id="soluonghanhkhach" placeholder="1" min="1" max="120" required />
+                    <div class="form-group">
+                        <label for="ngaydi">Ngày Đi</label>
+                        <input type="date" name="ngaydi" id="ngaydi" required />
+                    </div>
 
-                    <label for="hangvemaybay">Hạng Vé</label>
-                    <select>
-                        <option>Phổ Thông</option>
-                        <option>Thương Gia</option>
-                        <option>Hạng Nhất</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="ngayve">Ngày Về</label>
+                        <input type="date" name="ngayve" id="ngayve" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="soluonghanhkhach">Số Lượng</label>
+                        <input type="number" name="soluonghanhkhach" id="soluonghanhkhach" placeholder="1" min="1" max="120" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hangvemaybay">Hạng Vé</label>
+                        <select>
+                            <option>Phổ Thông</option>
+                            <option>Thương Gia</option>
+                            <option>Hạng Nhất</option>
+                        </select>
+                    </div>
 
                     @*Nút bấm tìm kiếm vé*@
                     <button type="submit">Tìm Chuyến Bay</button>

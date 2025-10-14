@@ -1,0 +1,605 @@
+﻿body {
+}
+    #content {
+/*      max-width: 1240px;*/
+        margin: 20px auto;
+        padding: 0 20px;
+        margin-bottom: 200px;
+    }
+
+    /*Tabs => Khi nhấn vào các nút thì sẽ hiển thị khung chọn vé ra*/
+    .service-tabs {
+        background: linear-gradient(180deg, #0A3D62 0%, #E8630A 150%);
+        /*padding: 20px;*/
+        padding: 30px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        margin: 40px auto;
+        max-width: 1400px;
+    }
+
+    /* Phần cha - khung chứa các nút tab ấn để chuyển form => lớp cha bao gồm 5 nút tab */
+    .tab-buttons {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Ẩn nút tròn để tick => ẩn radio để trông chuyên nghiệp hơn */
+    .tab-buttons input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* nút tab lựa chọn thể loại vé */
+    .tab-buttons .tab-service {
+        /*padding: 12px 25px;*/
+        padding: 14px 30px;
+        background-color: #001C40;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        user-select: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    /*Khi di chuột qua các tab => Hover effect*/
+    .tab-buttons .tab-service:hover {
+        background-color: #003366;
+        /*filter: brightness(110%);*/
+        /*color: white;*/
+        /*border: 2px solid #001C40;*/
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Active effect - khi click */
+    .tab-buttons .tab-service:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+
+    /* Khi nhấn vào tab=> đang ở tab nào thì tab đó sẽ sáng lên */
+    .tab-buttons input[type="radio"]:checked + label {
+        background-color: white;
+        color: #001C40;
+        border: 2px solid #001C40;
+/*        opacity: 0.8;
+        backdrop-filter: blur(5px);*/
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        transform: translateY(-2px);
+    }
+    /* ========== Form tìm kiếm ============*/
+    .form-service {
+        display: none;
+    }
+
+    /* Hiển thị form khi tab tương ứng được chọn */
+    /*VD: Khi nhấn vào thẻ input có id là tab-plane thì form có class là form-plane sẽ hiển thị lên*/
+    #tab-plane:checked ~ .form-plane,
+    #tab-train:checked ~ .form-train,
+    #tab-bus:checked ~ .form-bus,
+    #tab-hotel:checked ~ .form-hotel,
+    #tab-car:checked ~ .form-car {
+        display: block;
+        animation: fadeInForm 0.4s ease-out;
+    }
+
+    /* Animation xuất hiện form */
+    @keyframes fadeInForm {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
+
+    /* ================= Style cho khung form (Container form) =============== */
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        /*background-color: rgba(0, 28, 64, 0.92);*/
+        padding: 25px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+     /*Label*/
+     .form-row label {
+        margin-right: 8px;
+        font-weight: 600;
+        color: white;
+        font-size: 15px;
+        white-space: nowrap;
+     }
+
+      /*Input và selected*/
+     .form-row input[type="text"],
+     .form-row input[type="date"],
+     .form-row input[type="number"],
+     .form-row select {
+        /*padding: 8px 10px;*/
+        padding: 10px 14px;
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+        width: 160px;
+        background-color: white;
+        transition: all 0.3s ease;
+        outline: none;
+     }
+
+    /*Focus => Khi hiện con trỏ trong ô nhập cho input*/
+     .form-row input:focus,
+     .form-row select:focus {
+         border-color: #FFD700;
+         box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+     }
+
+     /* Hover effect cho input */
+     .form-row input:hover,
+     .form-row select:hover {
+         border-color: #999;
+     }
+
+     /* Style cho placeholder */
+     .form-row input::placeholder {
+         color: #999;
+         font-size: 14px;
+     }
+
+     /* ========= Nút tìm kiếm chuyến bay ==========*/
+     .form-row button {
+        font-weight: bold;
+        padding: 12px 30px;
+        background-color: #FFD700;
+        color: #001C40;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        margin-left: 10px;
+        margin-top: 22px;
+     }
+
+     .form-row button:hover {
+        background-color: #FFC700;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+     }
+
+     .form-row button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+     }
+
+     /*===================== RESPONSIVE =====================*/
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+    .service-tabs {
+        padding: 25px 15px;
+    }
+    
+    .tab-buttons .tab-service {
+        padding: 12px 24px;
+        font-size: 17px;
+    }
+    
+    .form-row {
+        gap: 12px;
+        padding: 20px 15px;
+    }
+    
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row input[type="number"],
+    .form-row select {
+        min-width: 140px;
+        font-size: 14px;
+    }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+    .service-tabs {
+        padding: 20px 12px;
+        border-radius: 12px;
+    }
+    
+    .tab-buttons {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .tab-buttons .tab-service {
+        padding: 10px 18px;
+        font-size: 15px;
+    }
+    
+    .form-row {
+        gap: 10px;
+        padding: 18px 12px;
+    }
+    
+    .form-row label {
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row input[type="number"],
+    .form-row select {
+        min-width: 120px;
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    
+    .form-row button {
+        padding: 10px 20px;
+        font-size: 15px;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    }
+
+    /* Small Mobile - Layout dọc */
+    @media (max-width: 480px) {
+    .service-tabs {
+        padding: 15px 8px;
+    }
+    
+    .tab-buttons {
+        gap: 6px;
+    }
+    
+    .tab-buttons .tab-service {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    /* Form chuyển sang layout dọc */
+    .form-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 15px 10px;
+    }
+    
+    /* Nhóm label + input thành hàng ngang */
+    .form-row label {
+        display: inline-block;
+        width: auto;
+        margin-right: 8px;
+        margin-bottom: 0;
+    }
+    
+    .form-row input[type="text"],
+    .form-row input[type="date"],
+    .form-row input[type="number"],
+    .form-row select {
+        width: 100%;
+        min-width: auto;
+        flex: 1;
+    }
+    
+    .form-row button {
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px;
+        font-size: 16px;
+    }
+    }
+
+/*===================== Áp dụng Dark Mode =====================*/
+
+    body.dark .service-tabs {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    }
+
+    body.dark .tab-buttons .tab-service {
+        background-color: #fffcf4;
+        color: #001C40;
+        border-color: transparent;
+    }
+
+    body.dark .tab-buttons .tab-service:hover {
+        background-color: #f0e5d0;
+    }
+
+    body.dark .tab-buttons input[type="radio"]:checked + label {
+        background-color: #001C40;
+        color: white;
+        border-color: #FFD700;
+    }
+
+    body.dark .form-row {
+        background-color: rgba(255, 252, 244, 0.95);
+    }
+
+    body.dark .form-row label {
+        color: #001C40;
+    }
+
+    body.dark .form-row button {
+        background-color: #001C40;
+        color: white;
+    }
+
+    body.dark .form-row button:hover {
+        background-color: #003366;
+    }
+
+     /* =============== Chuyến đi trong nước - ngoài nước ===============*/
+    .choose-trip h3 {
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+
+    .choose-trip .second-h3 {
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+
+    /* ================= Phần sale - khuyến mãi banner chạy ngang ==============*/
+    .sale-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        padding: 10px;
+    }
+
+    .sale-container h3{
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .sale-track {
+        display: flex;
+        gap: 20px;
+        animation: scrollX 20s linear infinite;
+    }
+
+    .sale-img {
+        max-height: 300px;
+        border-radius: 10px;
+        /*flex-shrink: 0;*/  /*không cho co lại */
+    }
+
+    /*Animation chạy ngang */
+    @keyframes scrollX {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /*========================= Phần content trong trang đặt vé ==========================*/
+    .choose-trip {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    /*Set thuộc tính cho hàng 1 hàng gồm 3 card*/
+    .choose-trip-1 {
+        /*Không responsive cho mobile*/
+/*       display: flex;
+        justify-content: space-between;
+        margin: 20px auto;
+        max-width: 1200px;
+        padding: 0 10px;
+        gap: 20px;*/
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    /*===================== Các card gợi ý những chuyến đi ===================*/
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        transition: all 0.3s ease; 
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /*Để bo tròn góc ảnh => nếu chỉ bo tròn card thì ảnh bị vuông */
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: translateY(-8px); 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Phần hình ảnh của thẻ => cần XEM LẠI */
+    .card-image-container {
+        position: relative; /*Để chứa tag khuyến mãi sau*/
+        width: 100%;
+        padding-top: 56.25%; /*Tỷ lệ 16:9 cho ảnh responsive*/
+    }
+
+    .card-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /*1 khối (1 dòng) => gồm 3 card */
+    .card-content {
+        padding: 20px; /* Tăng padding cho thoáng */
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1; /*Cho các card có chiều cao bằng nhau*/
+        text-align: left;
+    }
+
+    .card-content h3 {
+        font-size: 24px; 
+        margin-top: 0;
+        margin-bottom: 8px;
+        color: #001C40;
+    }
+
+    /*mô tả ngắn */
+    .card-content .description {
+        font-size: 15px;
+        line-height: 1.5;
+        color: #555; /*xám */
+        margin-bottom: 15px;
+        flex-grow: 1; /*Đẩy giá - nút xuống dưới cùng của card*/
+    }
+
+    /*Phần giá vé => bao gồm (giá từ: VD: 1.200.000 VNĐ) */
+    .card-content .price-info {
+        display: flex;
+        align-items: baseline; /*Cần xem lại*/
+        gap: 8px;
+        margin-top: auto; 
+        margin-bottom: 15px;
+    }
+
+    .card-content .price-info .label {
+        font-size: 14px;
+        color: #777;
+    }
+
+    .card-content .price-info .amount {
+        font-size: 20px;
+        color: #E8630A; 
+        font-weight: bold;
+    }
+
+    /* Nút "Đặt vé" */
+    .card-content .btn-book {
+        display: block; /*Block => chiếm hết chiều rộng */
+        text-align: center;
+        padding: 12px;
+        background-color: #001C40;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .card-content .btn-book:hover {
+        background-color: white;
+        color: #E8630A;
+        border: 2px solid #E8630A;
+    }
+
+    /* ============== Set phần ảnh banner nằm dưới chữ (đầu trang Đặt Vé) ==============*/
+    .anh-duoi-chu {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .anh-duoi-chu .img-datve-banner {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        filter: brightness(0.65);
+        transition: transform 0.5s ease, filter 0.3s ease;
+    }
+
+    .anh-duoi-chu:hover .img-datve-banner {
+        transform: scale(1.05); /* Phóng to ảnh */
+        filter: brightness(0.75); /* Tăng độ sáng */
+    }
+
+    /* lớp ảo cho chữ nằm trên ảnh */
+    .banner-text {
+        position: absolute;
+        inset: 0; /* phủ toàn bộ ảnh */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        padding: 0 10px; /* tránh chữ dính mép */
+        overflow: hidden;
+    }
+
+    .banner-text h2 {
+        font-size: 32px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    /*Set thuộc tính cho phần du lịch ngoài nước*/
+    .top-trip.out-country {
+        margin-top: 100px;
+    }
+
+    /*Set thuộc tính cho slogan ở thanh search chọn vé*/
+    .service-tabs h3 {
+        text-align: center;
+        font-size: 45px;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    /*================= Thanh tìm kiếm điểm đến => bên trên các thẻ gợi ý ================= */
+    .search-bar {
+        max-width: 800px;
+        margin: 30px auto 60px; 
+        display: flex; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-radius: 50px; 
+        overflow: hidden; /*ẩn phần tử thừa border-radius*/
+    }
+
+    .search-bar input {
+        flex-grow: 1; /*Ô nhập nhập địa điểm chiếm hết ko gian còn lại*/
+        border: none;
+        padding: 15px 25px;
+        font-size: 16px;
+        outline: none; /*Bỏ viền xanh*/
+    }
+
+    /*Ấn nút này để tìm kiếm*/
+    .search-bar button {
+        border: none;
+        background: linear-gradient(90deg, #0A3D62 0%, #E8630A 190%); /*Màu thứ 3 là màu cam*/
+        color: white;
+        padding: 0 30px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px; /*khoảng cách icon và chuwx*/
+    }
+
+    .search-bar button:hover {
+        background-color: #D35400; /*cam đậm*/
+    }

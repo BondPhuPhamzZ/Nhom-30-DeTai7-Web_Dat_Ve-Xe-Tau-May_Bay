@@ -144,6 +144,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\MyMainStyle\DangKyStyle.css" />
+    <Content Include="Content\MyMainStyle\DangNhapStyle.css" />
+    <Content Include="Content\MyMainStyle\DatVeStyle.css" />
+    <Content Include="Content\MyMainStyle\GioHangStyle.css" />
+    <Content Include="Content\MyMainStyle\KhamPhaStyle.css" />
+    <Content Include="Content\MyMainStyle\LienHeStyle.css" />
     <Content Include="Content\StyleSheet1.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

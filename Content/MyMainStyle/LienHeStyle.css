@@ -1,0 +1,92 @@
+﻿body {
+}
+    #content h2 {
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 10px;
+    }
+
+    /* Khung box bọc phần thông tin liên hệ của khách hàng */
+    .contact-form {
+        max-width: 500px;
+        width: 100%;
+        margin: 20px auto 30px;
+        padding: 20px;
+        border-radius: 10px;
+        background: linear-gradient(180deg, #0A3D62 0%, #E8630A 180%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border: 1px solid white;
+    }
+
+    /* Bọc phần text và phần khách hàng nhập thông tin */
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    /*Chọn lớp form-group ở cuối => phần text-area*/
+    .form-group:last-of-type {
+        margin-bottom: 0; 
+    }
+
+    .contact-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #FFD700;
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        outline: none;
+    }
+
+    .contact-form button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 12px;
+        background: white;
+        color: #001C40;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .contact-form button:hover {
+        background: #ffcc00;
+        color: #001C40;
+    }
+
+    /*===================== Responsive cho khung liên hệ =====================*/
+    /* Tablet */
+    @media (max-width: 768px) {
+        #content h2 {
+            font-size: 42px; 
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+        #content h2 {
+            font-size: 32px; 
+        }
+
+        .contact-form {
+            padding: 15px;
+        }
+    }
