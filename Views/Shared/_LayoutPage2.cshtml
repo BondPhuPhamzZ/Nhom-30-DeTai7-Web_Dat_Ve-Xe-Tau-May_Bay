@@ -134,35 +134,8 @@
         </div>
     </footer>
 
-    @*Đoạn này hỏi CHAT GPT*@
-    @*<script>
-            const toggle = document.getElementById('theme-toggle');
-            toggle.addEventListener('change', () => {
-                document.body.classList.toggle('dark', toggle.checked);
-            });
-        </script>*@
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme');
+    @*===== Link Javascript cho dark / light mode ====*@
+    <script src="~/Scripts/MyScript/Toggle-mode.js"></script>
 
-        // Kiểm tra xem người dùng đã lưu lựa chọn nào trước đó chưa
-        if (currentTheme) {
-            document.body.classList.add(currentTheme);
-            if (currentTheme === 'dark') {
-                themeToggle.checked = true;
-            }
-        }
-
-        // Lắng nghe sự kiện thay đổi của nút toggle
-        themeToggle.addEventListener('change', () => {
-            if (themeToggle.checked) {
-                document.body.classList.add('dark');
-                localStorage.setItem('theme', 'dark'); //Lưu lựa chọn vào localStorage => Người dùng khi chuyển trang không cần phải bật lại
-            } else {
-                document.body.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
 </body>
 </html>

@@ -306,6 +306,7 @@ body {
     height: 34px;
 }
 
+/*Ẩn ô checkbox*/
 .switch input {
     opacity: 0;
     width: 0;
@@ -324,6 +325,7 @@ body {
     border-radius: 34px;
 }
 
+/*Sau khi nhấn vào thì nút sẽ dịch sang phải => cách trái 4px */
 .slider:before {
     position: absolute;
     content: "";
@@ -344,7 +346,7 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* =============================== Dark Mode =============================== */
+/* =============================== Sau khi bật Toggle (Light/Dark mode) =============================== */
 body.dark {
     background-color: #001C40;
     color: #f1f1f1;
