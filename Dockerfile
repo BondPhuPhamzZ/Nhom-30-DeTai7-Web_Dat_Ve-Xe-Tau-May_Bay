@@ -6,25 +6,26 @@
 #WORKDIR /inetpub/wwwroot
 #COPY ${source:-obj/Docker/publish} .
 
-# === Giai doan 1: Build ung dung => Bat dau tu day ===
-# Su dung .NET 7 SDK image de build, co the doi version neu can (vi du: 6.0, 8.0)
+# === Giai đoạn 1: Build ứng dụng ===
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Sao chep file .csproj va restore cac package can thiet
-# Dau * giup no hoat dong du ten project cua ban la gi
-COPY ["*.csproj", "./"]
-RUN dotnet restore
+# Sao chép file .csproj và .sln để restore dependencies
+# Điều này giúp tối ưu hóa cache của Docker
+COPY ["*.sln", "./"]
+COPY ["Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay/*.csproj", "./Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay/"]
+RUN dotnet restore "./Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay.sln"
 
-# Sao chep toan code con lai va tien trinh publish
+# Sao chép toàn bộ source code còn lại
 COPY . .
-RUN dotnet publish -c Release -o /app/publish
+WORKDIR "/src/Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay"
 
-# === Giai đoan 2: Chay ung dụng ===
-# Su dung .NET 7 ASP.NET runtime image nho hon de chay
+# <<< THAY ĐỔI QUAN TRỌNG Ở ĐÂY
+# Chỉ định rõ project cần publish
+RUN dotnet publish "Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay.csproj" -c Release -o /app/publish
+
+# === Giai đoạn 2: Chạy ứng dụng ===
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app/publish .
-
-# THAY ten FILE DLL vao day
 ENTRYPOINT ["dotnet", "Nhom-30-DeTai7-Web_Dat_Ve-Xe-Tau-May_Bay.dll"]
