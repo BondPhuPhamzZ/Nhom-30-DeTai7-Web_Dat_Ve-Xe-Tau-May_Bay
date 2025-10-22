@@ -868,7 +868,7 @@
         }
     }
 
-    /* Tiêu đề kết quả tìm kiếm */
+    /* Tiêu đề kết quả tìm kiếm (tiêu đề => VD: KẾT QUẢ TÌM KIẾM VÉ MÁY BAY) */
     .search-section h2 {
         font-size: 20px;
         font-weight: bold;
