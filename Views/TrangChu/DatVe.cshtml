@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "DatVe";
+    ViewBag.Title = "Đặt Vé";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+    @*link CSS*@
     <link href="~/Content/MyMainStyle/DatVeStyle.css" rel="stylesheet" />
 }
 
@@ -34,27 +35,29 @@
     </div>
     <hr />
 
+    @* Khung FORM TÌM KIẾM các loại VÉ *@
     <div class="service-tabs">
         <div class="tab-buttons">
             <!-- Radio buttons và Labels cho tabs -->
-                <input type="radio" id="tab-plane" name="service" checked />
-                <label class="tab-service" for="tab-plane">Vé máy bay</label>
+            <input type="radio" id="tab-plane" name="service" checked />
+            <label class="tab-service" for="tab-plane">Vé máy bay</label>
 
-                <input type="radio" id="tab-train" name="service" />
-                <label class="tab-service" for="tab-train">Vé tàu</label>
+            <input type="radio" id="tab-train" name="service" />
+            <label class="tab-service" for="tab-train">Vé tàu</label>
 
-                <input type="radio" id="tab-bus" name="service" />
-                <label class="tab-service" for="tab-bus">Vé xe</label>
+            <input type="radio" id="tab-bus" name="service" />
+            <label class="tab-service" for="tab-bus">Vé xe</label>
 
-                <input type="radio" id="tab-hotel" name="service" />
-                <label class="tab-service" for="tab-hotel">Khách sạn</label>
+            <input type="radio" id="tab-hotel" name="service" />
+            <label class="tab-service" for="tab-hotel">Khách sạn</label>
 
-                <input type="radio" id="tab-car" name="service" />
-                <label class="tab-service" for="tab-car">Thuê xe</label>
+            <input type="radio" id="tab-car" name="service" />
+            <label class="tab-service" for="tab-car">Thuê xe</label>
 
             <!-- Form vé máy bay -->
             <form class="form-service form-plane">
-                <div class="form-row"> @*Form-row => phần khung bọc các chức năng để lựa chọn vé*@
+                <div class="form-row">
+                    @*Form-row => phần khung bọc các chức năng để lựa chọn vé*@
                     <div class="form-group">
                         <label>Loại vé</label>
                         <select>
@@ -90,7 +93,7 @@
                             <option>Hạng Nhất</option>
                         </select>
                     </div>
-                    <button type="submit">Tìm Chuyến Bay</button>
+                    <a href=".trip-plane" class="btn-search">Tìm Vé</a>
                 </div>
             </form>
 
@@ -109,7 +112,7 @@
                         <label>Ngày đi</label>
                         <input type="date" required />
                     </div>
-                    <button type="submit">Tìm Vé Tàu</button>
+                    <a href=".trip-train" class="btn-search">Tìm Vé</a>
                 </div>
             </form>
 
@@ -128,7 +131,7 @@
                         <label>Ngày đi</label>
                         <input type="date" required />
                     </div>
-                    <button type="submit">Tìm Vé Xe</button>
+                    <a href=".trip-bus" class="btn-search">Tìm Vé</a>
                 </div>
             </form>
 
@@ -147,7 +150,7 @@
                         <label>Trả phòng</label>
                         <input type="date" required />
                     </div>
-                    <button type="submit">Tìm Khách Sạn</button>
+                    <a href=".trip-hotel" class="btn-search">Tìm Khách Sạn</a>
                 </div>
             </form>
 
@@ -166,13 +169,1226 @@
                         <label>Ngày trả</label>
                         <input type="date" required />
                     </div>
-                    <button type="submit">Thuê Xe</button>
+                    <a href=".trip-car" class="btn-search">Thuê Xe</a>
                 </div>
             </form>
         </div>
     </div>
 
-    @*Những chuyến đi nổi bật => gợi ý vé*@
+
+    @*===== Kết quả sau khi nhấn tìm kiếm => hiển thị các loại vé =====*@
+<div id="search-results-container">
+    @* === KẾT QUẢ TÌM VÉ MÁY BAY === *@
+    @*Search-section sẽ bọc cả kết quả của loại vé đó, VD: Bọc cả 3 vé máy bay *@
+    <div class="search-section search-plane">
+        <h2 style="font-size: 30px; margin-bottom: 50px; text-align: left">Kết quả tìm kiếm chuyến bay</h2>
+        <div class="results-list">
+            @* Card chuyến bay 1 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/flight-ticket-4.jpg" alt="Chuyến bay">
+                </div>
+                <div class="card-content">
+                    <h3>Vietnam Airlines VN123</h3>
+                    <p class="route">Hà Nội → TP.HCM</p>
+                    <p class="time">07:00 - 09:15 (2h 15m)</p>
+                    <p class="description">Hạng phổ thông, còn 15 ghế trống</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">1.850.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card chuyến bay 2 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/flight-ticket-4.jpg" alt="Chuyến bay">
+                </div>
+                <div class="card-content">
+                    <h3>Vietjet Air VJ456</h3>
+                    <p class="route">Hà Nội → TP.HCM</p>
+                    <p class="time">10:30 - 12:45 (2h 15m)</p>
+                    <p class="description">Hạng phổ thông, còn 8 ghế trống</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">1.450.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card chuyến bay 3 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/flight-ticket-4.jpg" alt="Chuyến bay">
+                </div>
+                <div class="card-content">
+                    <h3>Bamboo Airways QH789</h3>
+                    <p class="route">Hà Nội → TP.HCM</p>
+                    <p class="time">14:00 - 16:15 (2h 15m)</p>
+                    <p class="description">Hạng phổ thông, còn 20 ghế trống</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">1.650.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* === KẾT QUẢ TÌM VÉ TÀU === *@
+    <div class="search-section search-train">
+        <h2 style="font-size: 30px; margin-bottom: 50px; text-align: left">Kết quả tìm kiếm vé tàu</h2>
+        <div class="results-list">
+            @* Card tàu 1 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/train-5.jpg" alt="Tàu hỏa">
+                </div>
+                <div class="card-content">
+                    <h3>SE1 - Tàu Thống Nhất</h3>
+                    <p class="route">Ga Sài Gòn → Ga Hà Nội</p>
+                    <p class="time">19:00 - 08:00+1 (37h)</p>
+                    <p class="description">Giường nằm khoang 4, điều hòa</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">950.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card tàu 2 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/train-5.jpg" alt="Tàu hỏa">
+                </div>
+                <div class="card-content">
+                    <h3>SE3 - Tàu Bắc Nam</h3>
+                    <p class="route">Ga Sài Gòn → Ga Hà Nội</p>
+                    <p class="time">11:00 - 00:30+2 (37h 30m)</p>
+                    <p class="description">Giường nằm khoang 6, điều hòa</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">750.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card tàu 3 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/train-5.jpg" alt="Tàu hỏa">
+                </div>
+                <div class="card-content">
+                    <h3>SE5 - Tàu Hòa Bình</h3>
+                    <p class="route">Ga Sài Gòn → Ga Hà Nội</p>
+                    <p class="time">22:00 - 11:00+2 (37h)</p>
+                    <p class="description">Ghế ngồi mềm, điều hòa</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">580.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* === KẾT QUẢ TÌM VÉ XE === *@
+    <div class="search-section search-bus">
+        <h2 style="font-size: 30px; margin-bottom: 50px; text-align: left">Kết quả tìm kiếm vé xe</h2>
+        <div class="results-list">
+            @* Card xe 1 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe khách">
+                </div>
+                <div class="card-content">
+                    <h3>Phương Trang Limousine</h3>
+                    <p class="route">TP.HCM → Đà Lạt</p>
+                    <p class="time">06:00 - 14:30 (8h 30m)</p>
+                    <p class="description">Giường nằm VIP, 28 chỗ</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">280.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card xe 2 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe khách">
+                </div>
+                <div class="card-content">
+                    <h3>Hải Vân Limousine</h3>
+                    <p class="route">TP.HCM → Đà Lạt</p>
+                    <p class="time">08:30 - 17:00 (8h 30m)</p>
+                    <p class="description">Giường nằm cao cấp, 22 chỗ</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">320.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card xe 3 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe khách">
+                </div>
+                <div class="card-content">
+                    <h3>Thanh Bình Limousine</h3>
+                    <p class="route">TP.HCM → Đà Lạt</p>
+                    <p class="time">22:00 - 06:30+1 (8h 30m)</p>
+                    <p class="description">Giường nằm, 40 chỗ</p>
+                    <div class="price-info">
+                        <span class="label">Giá vé:</span>
+                        <span class="amount">220.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* === KẾT QUẢ TÌM KHÁCH SẠN === *@
+    <div class="search-section search-hotel">
+        <h2 style="font-size: 30px; margin-bottom: 50px; text-align: left">Kết quả tìm kiếm khách sạn</h2>
+        <div class="results-list">
+            @* Card khách sạn 1 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/hotel-4.jpg" alt="Khách sạn">
+                </div>
+                <div class="card-content">
+                    <h3>Vinpearl Resort Đà Nẵng</h3>
+                    <p class="route">Bãi biển Mỹ Khê, Đà Nẵng</p>
+                    <p class="time">⭐⭐⭐⭐⭐ (9.2/10 - Tuyệt)</p>
+                    <p class="description">View biển, bao gồm ăn sáng</p>
+                    <div class="price-info">
+                        <span class="label">Giá phòng/đêm:</span>
+                        <span class="amount">2.500.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng phòng">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card khách sạn 2 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/hotel-4.jpg" alt="Khách sạn">
+                </div>
+                <div class="card-content">
+                    <h3>Nesta Hotel Đà Nẵng</h3>
+                    <p class="route">Trung tâm thành phố, Đà Nẵng</p>
+                    <p class="time">⭐⭐⭐⭐ (8.5/10 - Rất tốt)</p>
+                    <p class="description">View thành phố, gần bãi biển</p>
+                    <div class="price-info">
+                        <span class="label">Giá phòng/đêm:</span>
+                        <span class="amount">1.200.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng phòng">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card khách sạn 3 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/hotel-4.jpg" alt="Khách sạn">
+                </div>
+                <div class="card-content">
+                    <h3>Brilliant Hotel Đà Nẵng</h3>
+                    <p class="route">Gần cầu Rồng, Đà Nẵng</p>
+                    <p class="time">⭐⭐⭐ (7.8/10 - Tốt)</p>
+                    <p class="description">Giá rẻ, sạch sẽ, tiện nghi đầy đủ</p>
+                    <div class="price-info">
+                        <span class="label">Giá phòng/đêm:</span>
+                        <span class="amount">650.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng phòng">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* === KẾT QUẢ TÌM THUÊ XE === *@
+    <div class="search-section search-car">
+        <h2 style="font-size: 30px; margin-bottom: 50px; text-align: left">Kết quả tìm kiếm thuê xe</h2>
+        <div class="results-list">
+            @* Card xe 1 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe cho thuê">
+                </div>
+                <div class="card-content">
+                    <h3>Toyota Vios 2023</h3>
+                    <p class="route">Tự lái / Có tài xế</p>
+                    <p class="time">Số tự động, 4 chỗ</p>
+                    <p class="description">Xe mới, nhiên liệu đầy, bảo hiểm</p>
+                    <div class="price-info">
+                        <span class="label">Giá thuê/ngày:</span>
+                        <span class="amount">600.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số ngày thuê">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card xe 2 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe cho thuê">
+                </div>
+                <div class="card-content">
+                    <h3>Honda City 2022</h3>
+                    <p class="route">Tự lái</p>
+                    <p class="time">Số tự động, 5 chỗ</p>
+                    <p class="description">Xe đẹp, tiết kiệm nhiên liệu</p>
+                    <div class="price-info">
+                        <span class="label">Giá thuê/ngày:</span>
+                        <span class="amount">550.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số ngày thuê">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            @* Card xe 3 *@
+            <div class="result-card-journey">
+                <div class="card-image-container">
+                    <img src="~/img/car-5.jpg" alt="Xe cho thuê">
+                </div>
+                <div class="card-content">
+                    <h3>Ford Ranger 2023</h3>
+                    <p class="route">Có tài xế</p>
+                    <p class="time">Bán tải, 5 chỗ</p>
+                    <p class="description">Thích hợp đi phượt, leo núi</p>
+                    <div class="price-info">
+                        <span class="label">Giá thuê/ngày:</span>
+                        <span class="amount">1.200.000 VNĐ</span>
+                    </div>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số ngày thuê">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+    <hr />
+
+    @* ===== VÉ GỢI Ý LIÊN QUAN ĐẾN TỪNG LOẠI VÉ (tự động hiện khi ấn vào loại vé đó => không cần ấn nút Tìm Kiếm để hiện ra) ===== *@
+    <div class="trip-results">
+        <!-- Vé máy bay -->
+        <div class="trip-section trip-plane active">
+            <h4>Những chuyến đi nổi bật</h4>
+            @*Bọc 6 card vé*@
+            <div class="trip-grid">
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="Hà Nội - Đà Nẵng">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Đà Nẵng</h3>
+                        <p class="description">Trải nghiệm thành phố biển xinh đẹp chỉ sau 1 giờ bay.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">1.200.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="TP.HCM - Hà Nội">
+                    </div>
+                    <div class="card-content">
+                        <h3>TP.HCM → Hà Nội</h3>
+                        <p class="description">Bay nhanh 2 giờ, khám phá thủ đô ngàn năm văn hiến.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">1.450.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="Hà Nội - Nha Trang">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Nha Trang</h3>
+                        <p class="description">Bay thẳng đến thành phố biển đẹp nhất Việt Nam.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">1.600.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="TP.HCM - Singapore">
+                    </div>
+                    <div class="card-content">
+                        <h3>TP.HCM → Singapore</h3>
+                        <p class="description">Bay quốc tế giá rẻ, khám phá đảo quốc sư tử.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">2.500.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="Hà Nội - Bangkok">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Bangkok</h3>
+                        <p class="description">Khám phá thủ đô Thái Lan với ẩm thực và mua sắm tuyệt vời.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">2.700.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/flight-5.jpg" alt="Đà Nẵng - Seoul">
+                    </div>
+                    <div class="card-content">
+                        <h3>Đà Nẵng → Seoul</h3>
+                        <p class="description">Bay đến Hàn Quốc, thưởng ngoạn mùa lá đỏ lãng mạn.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">4.200.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vé tàu -->
+        <div class="trip-section trip-train">
+            <h4>Những chuyến đi nổi bật</h4>
+            <div class="trip-grid">
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/train-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hà Nội → Sài Gòn</h3>
+                        <p class="description">Hành trình xuyên Việt qua những cảnh đẹp ven biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vé xe -->
+        <div class="trip-section trip-bus">
+            <h4>Những chuyến đi nổi bật</h4>
+            <div class="trip-grid">
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/car-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Phương Trang Limousine</h3>
+                        <p class="route">TP.HCM → Đà Lạt</p>
+                        <p class="time">06:00 - 14:30 (8h 30m)</p>
+                        <p class="description">Giường nằm VIP, 28 chỗ</p>
+                        <div class="price-info">
+                            <span class="label">Giá vé:</span>
+                            <span class="amount">280.000 VNĐ</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Khách sạn -->
+        <div class="trip-section trip-hotel">
+            <h4>Nơi nghỉ dưỡng nổi bật</h4>
+            <div class="trip-grid">
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Sofitel Legend Metropole</h3>
+                        <p class="description">Là một trong những khách sạn lâu đời và sang trọng bậc nhất tại Hà Nội, mang đậm kiến trúc thuộc địa Pháp cổ điển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Pistachio Hotel Sapa</h3>
+                        <p class="description">Nổi bật với tầm nhìn tuyệt đẹp ra thung lũng Mường Hoa và dãy Hoàng Liên Sơn. Khách sạn có thiết kế ấn tượng, kết hợp giữa nét hiện đại và văn hóa bản địa.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Danang Sun Peninsula</h3>
+                        <p class="description">Nơi đây nổi tiếng với kiến trúc độc đáo của Bill Bensley, tầm nhìn ra biển trọn vẹn và dịch vụ siêu sang.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Laluna Hoi An Riverside</h3>
+                        <p class="description">Tọa lạc bên bờ sông Hoài thơ mộng và gần Phố cổ Hội An. Khách sạn này được đánh giá cao nhờ vị trí thuận tiện, phòng ốc tiện nghi.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Liberty Central Saigon</h3>
+                        <p class="description">Nằm ngay tại Quận 1 sôi động, khách sạn này rất thuận tiện để khám phá các địa điểm nổi tiếng như Chợ Bến Thành và Dinh Độc Lập.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/hotel-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Palm Bay Resort Phu Quoc</h3>
+                        <p class="description">Là một lựa chọn 3 sao nổi bật, được đánh giá cao về không gian thoải mái, hồ bơi ngoài trời và vị trí gần biển.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/ĐÊM</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thuê xe -->
+        <div class="trip-section trip-car">
+            <h4>Có thể bạn đang tìm loại xe này</h4>
+            <div class="trip-grid">
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/mercedes-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Mercedes</h3>
+                        <p class="description">Thương hiệu xe hạng sang hàng đầu của Đức, nổi tiếng với sự kết hợp giữa công nghệ tiên tiến, nội thất xa hoa và sự thoải mái vượt trội. Mercedes-Benz thường được xem là biểu tượng của sự sang trọng, uy tín và thành đạt.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/lexus-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Lexus</h3>
+                        <p class="description">Là phân khúc xe sang của Toyota (Nhật Bản). Lexus tập trung vào độ tin cậy tuyệt đối, sự êm ái, tĩnh lặng khi vận hành và chất lượng hoàn thiện thủ công tỉ mỉ. Đây là lựa chọn hàng đầu cho những ai tìm kiếm sự sang trọng bền bỉ và thoải mái.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/toyota-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Toyota</h3>
+                        <p class="description">Thương hiệu xe phổ thông hàng đầu của Nhật Bản. Toyota nổi tiếng toàn cầu với độ bền bỉ "nồi đồng cối đá", tính thực dụng, tiết kiệm nhiên liệu và khả năng giữ giá cực tốt khi bán lại.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/audi-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Audi</h3>
+                        <p class="description">Thương hiệu xe sang của Đức (thuộc tập đoàn Volkswagen). Audi nổi bật với thiết kế hiện đại, sắc sảo, công nghệ tiên phong (đặc biệt là hệ thống đèn) và hệ dẫn động bốn bánh "Quattro" trứ danh, mang lại khả năng vận hành ổn định.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/range-rover-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Range Rover</h3>
+                        <p class="description">Đây thực chất là dòng xe SUV hạng sang chủ lực của thương hiệu Land Rover (Anh Quốc). Range Rover là biểu tượng của "SUV siêu sang", kết hợp hoàn hảo khảg năng off-road huyền thoại với một không gian nội thất sang trọng và tiện nghi bậc nhất.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="~/img/ford-5.jpg" alt="Hà Nội - Sài Gòn">
+                    </div>
+                    <div class="card-content">
+                        <h3>Ford</h3>
+                        <p class="description">Thương hiệu xe phổ thông lớn của Mỹ. Ford rất mạnh ở mảng xe bán tải (như "vua bán tải" Ranger, F-150) và SUV (như Everest). Xe Ford mang đặc trưng của sự mạnh mẽ, bền bỉ, thực dụng và cảm giác lái đầm chắc kiểu Mỹ.</p>
+                        <div class="price-info">
+                            <span class="label">Giá từ:</span>
+                            <span class="amount">850.000 VNĐ/NGÀY</span>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                            @*<span class="quantity-value">1</span>*@
+                            <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                            <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                        </div>
+                        <div class="card-actions">
+                            @* Thêm một div để chứa 2 nút *@
+                            <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                            <a href="#" class="btn-book">Đặt vé ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    @* ======= Những chuyến đi nổi bật => gợi ý vé =====*@
     @*Dòng vé đầu tiên => Chuyến bay trong nước*@
     <div class="choose-trip">
         <h3>Du lịch trong nước</h3>
@@ -196,7 +1412,17 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        @*<span class="quantity-value">1</span>*@
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -213,7 +1439,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -230,7 +1465,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -250,7 +1494,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -267,7 +1520,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -284,7 +1546,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">1.200.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -309,7 +1580,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">3.900.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -326,7 +1606,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">8.000.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -343,7 +1632,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">13.000.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -362,7 +1660,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">5.000.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -379,7 +1686,16 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">4.000.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
 
@@ -396,9 +1712,24 @@
                         <span class="label">Giá từ:</span>
                         <span class="amount">4.000.000 VNĐ/Người</span>
                     </div>
-                    <a href="#" class="btn-book">Đặt vé</a>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn minus-btn" aria-label="Giảm số lượng">-</button>
+                        <input type="number" class="quantity-value" value="1" min="1" aria-label="Số lượng vé">
+                        <button class="quantity-btn plus-btn" aria-label="Tăng số lượng">+</button>
+                    </div>
+                    <div class="card-actions">
+                        @* Thêm một div để chứa 2 nút *@
+                        <a href="#" class="btn-add-to-cart"><i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ</a>
+                        <a href="#" class="btn-book">Đặt vé ngay</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@*LINK Javascript phần tăng giảm số lượng vé*@
+<script src="~/Scripts/MyScript/TangGiamSoLuongVe.js"></script>
+@*Javascript phần gợi ý những vé nổi bật khi nhấn vào loại vé đó*@
+<script src="~/Scripts/MyScript/KetQuaTimKiem.js"></script> 
+@*Javascript lkhi tìm kiếm => hiển thị KẾT QUẢ*@
+<script src="~/Scripts/MyScript/TimKiemLoaiVe.js"></script>

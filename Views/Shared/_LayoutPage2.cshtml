@@ -12,29 +12,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/js/all.min.js"></script>
     @*Font chữ*@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    @*Link CSS*@
+    @*CSS Reset*@
+    <link href="~/Content/MyMainStyle/ResetCSS.css" rel="stylesheet" />
+    @*Link CSS của Layout gốc*@
     <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
 </head>
 
 @* ==========================LAYOUT GỐC CỦA CÁC TRANG KHÁC ==============================*@
 
 @*Cấu trúc - khung sườn chung nằm ở đây*@
-<body>
-    @*Phần thanh menu (đầu trang web)*@
+<body id="top-body">
+    @*Phần thanh menu (đầu trang web) => phần bên trái thanh menu*@
     <div class="nav-bar">
         <div class="web-logo">
             <a href="Index"><img src="~/img/logo-web-ve.png" alt="Three Horizon" /></a>
             <span class="brand-name">Three Horizon</span>
         </div>
 
+    @* Menu hamburger => chỉ hiển thị ở mobile *@
+        <div class="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+    @* Các nút chuyển qua web khác (phần ở giữa thanh menu) *@
         <div class="nav-bar-level1">
             <a href="Index" class="fm-menu">Trang Chủ</a>
             <a href="KhamPha" class="fm-menu">Khám Phá</a>
             <a href="DatVe" class="fm-menu">Đặt Vé</a>
             <a href="LienHe" class="fm-menu">Liên Hệ</a>
         </div>
-        <!-- switch code => Nút chuyển đổi sáng tối trang web -->
+
+    @*Phần nút toggle - Giỏ hàng - Nút đăng nhập (phần bên phải thanh menu)*@
         <div class="nav-bar-right">
+            <!-- switch code => Nút chuyển đổi sáng tối trang web -->
             <label class="switch">
                 <input type="checkbox" id="theme-toggle">
                 <span class="slider"></span>
@@ -87,6 +97,11 @@
         </div>
     </div>
 
+    @* Nút ấn (arrow) để trượt lên đầu trang web *@
+    <a href="#top-body" class="click-me-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
     @*Phần chân trang (cuối trang web)*@
     <footer class="site-footer">
         <div class="footer-container">
@@ -136,6 +151,7 @@
 
     @*===== Link Javascript cho dark / light mode ====*@
     <script src="~/Scripts/MyScript/Toggle-mode.js"></script>
-
+    @*==== Link Javascript cho menu burger ====*@
+    <script src="~/Scripts/MyScript/MenuHambugerMobile.js"></script>
 </body>
 </html>

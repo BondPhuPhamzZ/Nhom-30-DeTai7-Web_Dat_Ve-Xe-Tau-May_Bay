@@ -2,8 +2,9 @@
 }
     #content h2 {
         text-align: center;
-        font-size: 60px;
-        margin-bottom: 10px;
+        font-size: 50px;
+        margin-bottom: 20px;
+        margin-top: 50px;
     }
 
     /* Khung box bọc phần thông tin liên hệ của khách hàng */
@@ -37,7 +38,7 @@
 
     .contact-form input,
     .contact-form textarea {
-        width: 100%;
+        width: 100%; 
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -46,6 +47,7 @@
         transition: border-color 0.3s, box-shadow 0.3s;
     }
 
+    /*Hiệu ứng khi nhấn vào chỗ nhập thông tin*/
     .contact-form input:focus,
     .contact-form textarea:focus {
         border-color: #FFD700;
@@ -57,7 +59,7 @@
         margin-top: 15px;
         width: 100%;
         padding: 12px;
-        background: white;
+        background-color: white;
         color: #001C40;
         border: none;
         border-radius: 5px;

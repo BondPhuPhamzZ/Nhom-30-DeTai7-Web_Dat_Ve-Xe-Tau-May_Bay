@@ -189,7 +189,8 @@
      }
 
      /* ========= Nút tìm kiếm chuyến bay ==========*/
-     .form-row button {
+        /*Nút button cũ*/
+/*     .form-row button {
         font-weight: bold;
         padding: 12px 30px;
         background-color: #FFD700;
@@ -213,7 +214,39 @@
      .form-row button:active {
         transform: translateY(0);
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-     }
+     }*/
+    
+    .form-row a{
+        font-weight: bold;
+        padding: 12px 30px;
+        background-color: #FFD700;
+        color: #001C40;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        width: 100%;
+        height: 48px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .form-row a:hover{
+        background-color: #FFC700;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+    }
+
+    .form-row a:active{
+        transform: translateY(0);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
      /*===================== Responsive cho phần lựa chọn thể loại vé =====================*/
     
@@ -417,6 +450,8 @@
         text-align: center;
         font-size: 50px;
         font-weight: bold;
+        margin-bottom: 30px;
+        margin-top: 30px;
     }
 
     .sale-track {
@@ -537,9 +572,9 @@
     }
 
     /* Nút "Đặt vé" */
-    .card-content .btn-book {
-        display: block; /*Block => chiếm hết chiều rộng */
-        text-align: center;
+    /*.card-content .btn-book {
+        display: block;*/ /*Block => chiếm hết chiều rộng */
+        /*text-align: center;
         padding: 12px;
         background-color: #001C40;
         color: white;
@@ -555,7 +590,60 @@
         background-color: white;
         color: #E8630A;
         border: 2px solid #E8630A;
+    }*/
+    
+    /* ===== Nút thêm vào giỏ hàng và nút đặt vé cho trang Đặt vé ===== */
+    .card-content .card-actions {
+        display: flex; 
+        gap: 10px;    
+        margin-top: 15px; 
     }
+
+    /* Style chung cho cả 2 nút */
+    .card-content .card-actions a {
+        flex: 1; /* Chia đều chiều rộng */
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        gap: 8px; /* Khoảng cách icon và chữ */
+        text-align: center;
+        padding: 10px; 
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px; 
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    /* Style riêng cho nút "Đặt vé" (btn-book)*/
+    .card-content .card-actions .btn-book {
+        background-color: #001C40;
+        color: white;
+    }
+    .card-content .card-actions .btn-book:hover {
+        background-color: white;
+        color: #E8630A;
+        border-color: #E8630A;
+    }
+
+    /* Style riêng cho nút "Thêm vào giỏ" (btn-add-to-cart) - Màu phụ */
+    .card-content .card-actions .btn-add-to-cart {
+        background-color: #f0f0f0; /* Màu nền xám nhạt */
+        color: #001C40; /* Chữ màu xanh đậm */
+        border: 2px solid #001C40; /* Viền xanh đậm */
+    }
+
+    .card-content .card-actions .btn-add-to-cart:hover {
+        background-color: #001C40;
+        color: white;
+    }
+
+@media (max-width: 480px) {
+    .card-content .card-actions {
+        flex-direction: column; /* Chuyển thành cột trên mobile nhỏ */
+    }
+}
 
     /* ============== Set phần ảnh banner nằm dưới chữ (đầu trang Đặt Vé) ==============*/
     .anh-duoi-chu {
@@ -645,4 +733,245 @@
 
     .search-bar button:hover {
         background-color: #D35400; /*cam đậm*/
+    }
+
+    /* Bổ sung phần mới ở đây => báo cáo tiến độ Javascript */
+    /* =============== Phần cha bọc quanh 2 nút tăng giảm và chỗ nhập liệu ở giữa => Tăng giảm số lượng vé ================== */
+    .quantity-selector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px; 
+        margin-top: 15px;
+    }
+
+    /* Nút "+" để tăng, Nút "-" để giảm */
+    .quantity-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 20%; 
+        border: 2px solid #001C40;
+        background-color: #f0f0f0;
+        color: #001C40;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        user-select: none;  /*Chặn bôi đen chữ khi click nhanh */
+    }
+
+    /* Hover cho 2 nút tăng giảm */
+    .quantity-btn:hover {
+        background-color: #001C40;
+        color: white;
+    }
+
+    /* Khi nhấn giữ */
+    .quantity-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Phần nhập liệu */
+    .quantity-value {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        width: 40px; 
+        text-align: center;
+        border: none; 
+        background-color: transparent; 
+        -moz-appearance: textfield; /* Bỏ mũi tên tăng/giảm trên Firefox */
+    }
+
+    /* Bỏ mũi tên tăng/giảm trên Chrome, Safari, Edge */
+    .quantity-value::-webkit-outer-spin-button,
+    .quantity-value::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /*Bổ sung */
+    /* ==================== GỢI Ý RIÊNG CHO TỪNG LOẠI VÉ ==================== */
+    .trip-results {
+        max-width: 1300px;
+        margin: 60px auto;
+        padding: 0 20px;
+    }
+
+    .trip-results h4{
+        font-weight: bold;
+        font-size: 35px;
+        margin-bottom: 25px;
+    }
+
+    .trip-results h3 {
+        font-size: 25px;
+        color: #001C40;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    /* Bọc 6 card vé */
+    .trip-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    /* Ẩn tất cả nhóm vé, chỉ hiện nhóm đang active */
+    .trip-section {
+        display: none;
+        animation: fadeInForm 0.4s ease-out;
+    }
+
+    .trip-section.active {
+        display: block;
+    }
+
+    /* ============= KẾT QUẢ TÌM KIẾM VÉ ================*/
+    /* Container chứa tất cả kết quả */
+    #search-results-container {
+        max-width: 1300px;
+        margin: 60px auto;
+        padding: 0 20px;
+        display: none; /* Ẩn ban đầu, chỉ hiện khi có kết quả */
+    }
+
+    /* Mặc định ẩn tất cả phần tìm kiếm */
+    .search-section {
+        display: none;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    /* Chỉ hiện kết quả nào có class "active" */
+    .search-section.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+        animation: hienThiKetQua 0.6s ease-out;
+    }
+
+    /* Hiệu ứng xuất hiện */
+    @keyframes hienThiKetQua {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Tiêu đề kết quả tìm kiếm */
+    .search-section h2 {
+        font-size: 20px;
+        font-weight: bold;
+        color: #001C40;
+        margin-bottom: 40px;
+        text-align: center;
+        padding: 25px 0;
+        border-bottom: 2px solid #001C40;
+        position: relative;
+    }
+
+    /* Thẻ hr => đường gạch ngang */
+/*    .search-section h2::before {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    }*/
+
+/*    .search-section h2 i {
+        margin-right: 15px;
+        color: #E8630A;
+        animation: nhayNhay 2s ease-in-out infinite;
+    }*/
+
+    @keyframes nhayNhay {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+
+    /* Khối bọc 3 thẻ card (3 box vé) */
+    .results-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    /* Khung bọc mỗi Card (mỗi khung vé) hiển thị từng kết quả */
+    .result-card-journey {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .result-card-journey:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+/*        border-color: #E8630A;*/
+    }
+
+    /* Phần ảnh của card (vé) */
+    .result-card-journey .card-image-container,
+    .trip-grid .card-image-container{
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* Tỷ lệ 16:9 */
+        overflow: hidden;
+    }
+
+    .result-card-journey .card-image-container img,
+    .trip-grid .card-image-container img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .result-card-journey:hover .card-image-container img,
+    .trip-grid:hover .card-image-container img{
+        transform: scale(1.1);
+    }
+
+    /* Nội dung của card (vé) */
+    .result-card-journey .card-content,
+    .trip-grid .card-content {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+    }
+
+    .result-card-journey .card-content h3,
+    .trip-grid .card-content h3 {
+        font-size: 25px;
+        color: #001C40;
+    }
+
+    .result-card-journey .card-content p,
+    .trip-grid .card-content p{
+        font-size: 20px;
+        margin-top: 10px;
     }

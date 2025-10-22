@@ -4,7 +4,7 @@
         max-width: 500px;
         width: 100%;
         margin: 50px auto;
-        padding: 30px;
+        padding: 30px; /*thằng con bên trong cha*/
         border: 1px solid #ccc;
         border-radius: 10px;
         background: linear-gradient(180deg, #0A3D62 0%, #E8630A 180%);
@@ -16,6 +16,7 @@
     #content h2 {
         text-align: center;
         margin-bottom: 20px;
+        margin-top: 50px;
     }
 
     .fm-dangnhap input[type="text"],
